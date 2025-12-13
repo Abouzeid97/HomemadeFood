@@ -41,11 +41,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     address_latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
-    # user type
-    is_chef = models.BooleanField(default=False)
 
     objects = UserManager()
 
@@ -54,6 +51,43 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.email} ({self.first_name} {self.last_name})"
+
+    def get_user_type(self):
+        """Return 'chef' or 'consumer' based on related objects."""
+        if hasattr(self, 'chef'):
+            return 'chef'
+        elif hasattr(self, 'consumer'):
+            return 'consumer'
+        return None
+
+
+class Chef(models.Model):
+    """Chef-specific profile extending User."""
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='chef')
+    rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.0)
+    total_reviews = models.PositiveIntegerField(default=0)
+    bio = models.TextField(blank=True, null=True)
+    cuisine_specialties = models.CharField(max_length=255, blank=True, null=True)
+    years_of_experience = models.PositiveIntegerField(default=0)
+    is_verified = models.BooleanField(default=False)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Chef: {self.user.email}"
+
+
+class Consumer(models.Model):
+    """Consumer-specific profile extending User."""
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='consumer')
+    dietary_preferences = models.CharField(max_length=255, blank=True, null=True)
+    allergies = models.TextField(blank=True, null=True)
+    total_orders = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Consumer: {self.user.email}"
 
 
 class PaymentCard(models.Model):
@@ -73,19 +107,8 @@ class PaymentCard(models.Model):
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
-
-@receiver(post_save, sender=PaymentCard)
-def activate_user_on_card_save(sender, instance, created, **kwargs):
+@receiver(post_save, sender=User)
+def log_user_changes(sender, instance, created, **kwargs):
+    """Log user creation for debugging."""
     if created:
-        user = instance.user
-        if not user.is_active:
-            user.is_active = True
-            user.save(update_fields=['is_active'])
-
-
-@receiver(post_delete, sender=PaymentCard)
-def maybe_deactivate_user_on_card_delete(sender, instance, **kwargs):
-    user = instance.user
-    if not user.payment_cards.exists():
-        user.is_active = False
-        user.save(update_fields=['is_active'])
+        pass  # User created; Chef/Consumer will be created separately or on demand

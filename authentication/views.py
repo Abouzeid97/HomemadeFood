@@ -8,8 +8,10 @@ from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 
 from .serializers import (
-    SignupSerializer, LoginSerializer, UserSerializer, PaymentCardSerializer
+    SignupSerializer, LoginSerializer, UserSerializer, PaymentCardSerializer,
+    ChefSerializer, ConsumerSerializer
 )
+from .models import PaymentCard, Chef, Consumer
 
 User = get_user_model()
 
@@ -21,7 +23,16 @@ class SignupView(APIView):
         serializer = SignupSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        data = UserSerializer(user).data
+        user_type = request.data.get('user_type')
+        
+        # Return appropriate serializer based on user type
+        if user_type == 'chef':
+            chef = Chef.objects.get(user=user)
+            data = ChefSerializer(chef).data
+        else:
+            consumer = Consumer.objects.get(user=user)
+            data = ConsumerSerializer(consumer).data
+        
         return Response(data, status=status.HTTP_201_CREATED)
 
 
@@ -37,7 +48,24 @@ class LoginView(APIView):
         if not user:
             return Response({'detail': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
         token, _ = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key, 'user': UserSerializer(user).data})
+        
+        # Return user type specific data
+        user_type = user.get_user_type()
+        user_data = UserSerializer(user).data
+        
+        response_data = {
+            'token': token.key,
+            'user': user_data,
+        }
+        
+        if user_type == 'chef':
+            chef = Chef.objects.get(user=user)
+            response_data['profile'] = ChefSerializer(chef).data
+        elif user_type == 'consumer':
+            consumer = Consumer.objects.get(user=user)
+            response_data['profile'] = ConsumerSerializer(consumer).data
+        
+        return Response(response_data, status=status.HTTP_200_OK)
 
 
 class LogoutView(APIView):
