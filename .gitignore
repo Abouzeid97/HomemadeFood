@@ -5,6 +5,13 @@ __pycache__/
 
 # C extensions
 *.so
+QWEN.md
+dishes_module_plan.md
+TEST_PLAN_AUTH.md
+test_serializers.py
+test_urls.py
+test_models.py
+uml
 
 # Distribution / packaging
 .Python
