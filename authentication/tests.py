@@ -1254,4 +1254,237 @@ class AuthenticationIntegrationTestCase(BaseTestCase, APITestCase):
         # Verify password is not stored in plain text
         self.assertNotEqual(customer_user.password, 'testpassword123')
         self.assertNotEqual(chef_user.password, 'testpassword123')
+
+
+class PaymentCardAPITestCase(BaseTestCase, APITestCase):
+    """Test cases for payment card API endpoint"""
+
+    def setUp(self):
+        super().setUp()
+        # Create and login a test user
+        self.user = User.objects.create_user(
+            email='john@example.com',
+            first_name='John',
+            last_name='Doe',
+            phone_number='1234567890',
+            password='testpassword123',
+            is_active=True  # Initially active to allow login
+        )
+        Consumer.objects.create(user=self.user)
+
+        # Login to get token
+        login_url = reverse('login')
+        login_data = {'email': 'john@example.com', 'password': 'testpassword123'}
+        login_response = self.client.post(login_url, login_data, format='json')
+        self.token = login_response.data['token']
+        self.auth_headers = {'HTTP_AUTHORIZATION': f'Token {self.token}'}
+
+    def test_payment_card_creation_activates_user(self):
+        """Test that creating a payment card activates the user"""
+        # Create a new inactive user for this test
+        inactive_user = User.objects.create_user(
+            email='inactive@example.com',
+            first_name='Inactive',
+            last_name='User',
+            phone_number='0987654321',
+            password='testpassword123',
+            is_active=False  # Initially inactive
+        )
+        Consumer.objects.create(user=inactive_user)
+
+        # Login to get token for the inactive user (this should fail)
+        login_url = reverse('login')
+        login_data = {'email': 'inactive@example.com', 'password': 'testpassword123'}
+        login_response = self.client.post(login_url, login_data, format='json')
+
+        # Inactive user should not be able to login
+        self.assertEqual(login_response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        # Manually create a card to trigger the signal (simulating admin activation)
+        card = PaymentCard.objects.create(
+            user=inactive_user,
+            card_last4='1111',
+            cardholder_name='Inactive User',
+            exp_month=12,
+            exp_year=2027
+        )
+
+        # Refresh user from db to check if they're now active
+        inactive_user.refresh_from_db()
+        self.assertTrue(inactive_user.is_active)
+
+    def test_payment_card_creation_with_multiple_cards(self):
+        """Test that user remains active when adding multiple cards"""
+        # Add first card
+        card_data1 = {
+            'card_number': '4111111111111111',
+            'cardholder_name': 'John Doe',
+            'exp_month': 12,
+            'exp_year': 2027
+        }
+
+        url = reverse('payment_card_create')
+        response = self.client.post(url, card_data1, format='json', **self.auth_headers)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        # Refresh user from db
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.is_active)
+
+        # Add second card
+        card_data2 = {
+            'card_number': '5555555555554444',
+            'cardholder_name': 'John Doe',
+            'exp_month': 11,
+            'exp_year': 2026
+        }
+
+        response = self.client.post(url, card_data2, format='json', **self.auth_headers)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        # User should still be active
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.is_active)
+
+    def test_authentication_required_for_card_creation(self):
+        """Test that authentication is required to create a payment card"""
+        card_data = {
+            'card_number': '4111111111111111',
+            'cardholder_name': 'John Doe',
+            'exp_month': 12,
+            'exp_year': 2027
+        }
+
+        url = reverse('payment_card_create')
+        response = self.client.post(url, card_data, format='json')
+
+        # Should return either 401 (Unauthorized) or 403 (Forbidden) for unauthenticated requests
+        self.assertIn(response.status_code, [status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN])
+
+    def test_card_data_validation(self):
+        """Test that card data is properly validated"""
+        # Test with invalid card number
+        invalid_card_data = {
+            'card_number': '1234',  # Too short
+            'cardholder_name': 'John Doe',
+            'exp_month': 12,
+            'exp_year': 2027
+        }
+
+        url = reverse('payment_card_create')
+        response = self.client.post(url, invalid_card_data, format='json', **self.auth_headers)
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class PaymentCardSignalsTestCase(BaseTestCase, APITestCase):
+    """Test cases for payment card signals functionality"""
+
+    def test_user_activation_on_first_card_added(self):
+        """Test that user is activated when first payment card is added"""
+        user = User.objects.create_user(
+            email='test@example.com',
+            first_name='Test',
+            last_name='User',
+            phone_number='1234567890',
+            password='testpassword123',
+            is_active=False  # Initially inactive
+        )
+        Consumer.objects.create(user=user)
+
+        # Initially, the user should be inactive
+        user.refresh_from_db()
+        self.assertFalse(user.is_active)
+
+        # Add a payment card
+        card = PaymentCard.objects.create(
+            user=user,
+            card_last4='1111',
+            cardholder_name='Test User',
+            exp_month=12,
+            exp_year=2027
+        )
+
+        # Refresh user from db - should now be active
+        user.refresh_from_db()
+        self.assertTrue(user.is_active)
+
+    def test_user_deactivation_when_last_card_removed(self):
+        """Test that user is deactivated when last payment card is removed"""
+        user = User.objects.create_user(
+            email='test@example.com',
+            first_name='Test',
+            last_name='User',
+            phone_number='1234567890',
+            password='testpassword123',
+            is_active=True  # Initially active
+        )
+        Consumer.objects.create(user=user)
+
+        # Add a payment card
+        card = PaymentCard.objects.create(
+            user=user,
+            card_last4='1111',
+            cardholder_name='Test User',
+            exp_month=12,
+            exp_year=2027
+        )
+
+        # User should still be active
+        user.refresh_from_db()
+        self.assertTrue(user.is_active)
+
+        # Remove the card
+        card.delete()
+
+        # Refresh user from db - should now be inactive
+        user.refresh_from_db()
+        self.assertFalse(user.is_active)
+
+    def test_user_remains_active_with_multiple_cards(self):
+        """Test that user remains active when removing one of multiple cards"""
+        user = User.objects.create_user(
+            email='test@example.com',
+            first_name='Test',
+            last_name='User',
+            phone_number='1234567890',
+            password='testpassword123',
+            is_active=True  # Initially active
+        )
+        Consumer.objects.create(user=user)
+
+        # Add two payment cards
+        card1 = PaymentCard.objects.create(
+            user=user,
+            card_last4='1111',
+            cardholder_name='Test User',
+            exp_month=12,
+            exp_year=2027
+        )
+
+        card2 = PaymentCard.objects.create(
+            user=user,
+            card_last4='2222',
+            cardholder_name='Test User',
+            exp_month=11,
+            exp_year=2026
+        )
+
+        # User should be active
+        user.refresh_from_db()
+        self.assertTrue(user.is_active)
+
+        # Remove one card
+        card1.delete()
+
+        # Refresh user from db - should still be active (has card2)
+        user.refresh_from_db()
+        self.assertTrue(user.is_active)
+
+        # Remove the second card
+        card2.delete()
+
+        # Refresh user from db - should now be inactive (no cards left)
+        user.refresh_from_db()
+        self.assertFalse(user.is_active)
         

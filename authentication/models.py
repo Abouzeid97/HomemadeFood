@@ -112,3 +112,17 @@ def log_user_changes(sender, instance, created, **kwargs):
     """Log user creation for debugging."""
     if created:
         pass  # User created; Chef/Consumer will be created separately or on demand
+
+@receiver(post_save, sender=PaymentCard)
+def activate_user_on_card_added(sender, instance, created, **kwargs):
+    """Activate user when they add their first payment card."""
+    if created and instance.user.payment_cards.count() == 1:
+        instance.user.is_active = True
+        instance.user.save()
+
+@receiver(post_delete, sender=PaymentCard)
+def deactivate_user_if_no_cards(sender, instance, **kwargs):
+    """Deactivate user if they remove their last payment card."""
+    if instance.user.payment_cards.count() == 0:
+        instance.user.is_active = False
+        instance.user.save()
