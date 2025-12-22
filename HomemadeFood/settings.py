@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
 # Third-party and local apps
 INSTALLED_APPS += [
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'authentication',
@@ -50,6 +51,7 @@ INSTALLED_APPS += [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -142,3 +144,19 @@ REST_FRAMEWORK = {
 
 # Email backend for development (prints emails to console)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# CORS settings for frontend development
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React default
+    "http://127.0.0.1:3000",
+    "http://localhost:8080",  # Vue default
+    "http://127.0.0.1:8080",
+    "http://localhost:8000",  # Development server
+    "http://127.0.0.1:8000",
+]
+
+# Allow credentials to be included in CORS requests
+CORS_ALLOW_CREDENTIALS = True
+
+# Allow all headers by default for development
+CORS_ALLOW_ALL_ORIGINS = DEBUG  # Only for development, set to False in production

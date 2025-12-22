@@ -68,9 +68,7 @@ Then manually populate Chef/Consumer objects based on your migration logic.
   "password": "secure-password",
   "address_longitude": 31.2357,
   "address_latitude": 30.0444,
-  "user_type": "consumer",
-  "dietary_preferences": "vegan",
-  "allergies": "nuts, shellfish"
+  "user_type": "consumer"
 }
 ```
 
@@ -108,7 +106,7 @@ Login now includes a `profile` field with type-specific data:
 
 - **Users**: View all users, filter by `is_active`, `is_staff`, `created_at`
 - **Chefs**: Dedicated table showing chef-specific info (rating, verification, experience)
-- **Consumers**: Dedicated table showing consumer-specific info (dietary preferences, order count)
+- **Consumers**: Dedicated table showing consumer-specific info (order count)
 - **Payment Cards**: Track payment methods per user
 
 ## Best Practices
@@ -179,6 +177,80 @@ class Order(models.Model):
 4. **Admin Interface**: Separate admin pages for each type
 5. **Query Efficiency**: `Chef.objects.filter(...)` only queries chef data
 6. **Future-Proof**: Can add more user types (Admin, Support, etc.) without changing User model
+
+## User Profile Endpoint
+
+### GET /api/auth/profile/<user_id>/
+Retrieve user profile information with access controls:
+- Consumer can read chef profiles
+- Users can read their own profiles
+- Requires authentication
+
+**Example Request:**
+```bash
+curl -X GET \
+  http://localhost:8000/api/auth/profile/5/ \
+  -H 'Authorization: Token your-auth-token-here'
+```
+
+**Example Response (for chef profile viewed by consumer):**
+```json
+{
+  "id": 1,
+  "user": {
+    "id": 5,
+    "first_name": "Alice",
+    "last_name": "Chef",
+    "email": "alice@example.com",
+    "phone_number": "+201234567890",
+    "profile_picture_url": null,
+    "address_longitude": "31.235700",
+    "address_latitude": "30.044400",
+    "created_at": "2023-01-01T00:00:00Z",
+    "updated_at": "2023-01-01T00:00:00Z",
+    "is_active": true,
+    "user_type": "chef"
+  },
+  "rating": 4.5,
+  "total_reviews": 12,
+  "bio": "Passionate about Italian cuisine",
+  "cuisine_specialties": "Italian, Mediterranean",
+  "years_of_experience": 5,
+  "is_verified": false,
+  "created_at": "2023-01-01T00:00:00Z",
+  "updated_at": "2023-01-01T00:00:00Z"
+}
+```
+
+### PUT /api/auth/profile/<user_id>/
+Update user's own profile completely (full update).
+- Both chefs and consumers can update their own profiles
+- Requires authentication as the user whose profile is being updated
+
+### PATCH /api/auth/profile/<user_id>/
+Update user's own profile partially (partial update).
+- Both chefs and consumers can update their own profiles
+- Requires authentication as the user whose profile is being updated
+
+**Example Request (PATCH):**
+```bash
+curl -X PATCH \
+  http://localhost:8000/api/auth/profile/5/ \
+  -H 'Authorization: Token your-auth-token-here' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "bio": "Updated bio for my restaurant",
+    "cuisine_specialties": "Italian, Mediterranean, French"
+  }'
+```
+
+**Access Controls Summary:**
+- Consumer → Chef: Read allowed
+- Chef → Consumer: Read NOT allowed
+- User → Own profile: Read and Write allowed for both chefs and consumers
+- Chef → Chef (other): No access
+- Consumer → Consumer: No access through this endpoint
+- Any user → Other user (not chef): No access through this endpoint
 
 ## Testing
 

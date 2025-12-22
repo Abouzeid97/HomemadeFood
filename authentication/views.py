@@ -6,12 +6,14 @@ from rest_framework.authtoken.models import Token
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
+from django.shortcuts import get_object_or_404
 
 from .serializers import (
     SignupSerializer, LoginSerializer, UserSerializer, PaymentCardSerializer,
     ChefSerializer, ConsumerSerializer
 )
 from .models import PaymentCard, Chef, Consumer
+from .permissions import UserProfilePermission
 
 User = get_user_model()
 
@@ -124,3 +126,105 @@ class PaymentCardCreateView(APIView):
         serializer.is_valid(raise_exception=True)
         card = serializer.save()
         return Response({'card': serializer.data}, status=status.HTTP_201_CREATED)
+
+
+class UserProfileView(APIView):
+    """
+    View to retrieve user profiles with access controls:
+    - Consumer can read chef profiles
+    - User can read their own profile
+    - Chef can update their own profile
+    - Consumer can update their own profile
+    """
+    permission_classes = [permissions.IsAuthenticated, UserProfilePermission]
+
+    def get(self, request, user_id):
+        # Get the user whose profile is being requested
+        target_user = get_object_or_404(User, id=user_id)
+
+        # Check the permission using the custom permission class
+        if not self.permission_classes[1]().has_object_permission(request, self, target_user):
+            return Response(
+                {'detail': 'You do not have permission to view this profile'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        # User can view their own profile or consumer can view chef profile
+        user_type = target_user.get_user_type()
+        if user_type == 'chef':
+            chef = Chef.objects.get(user=target_user)
+            serializer = ChefSerializer(chef)
+        elif user_type == 'consumer':
+            consumer = Consumer.objects.get(user=target_user)
+            serializer = ConsumerSerializer(consumer)
+        else:
+            serializer = UserSerializer(target_user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, user_id):
+        # Only allow user to update their own profile
+        target_user = get_object_or_404(User, id=user_id)
+
+        if request.user.id != target_user.id:
+            return Response(
+                {'detail': 'You can only update your own profile'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        # Check if the user is a chef
+        if hasattr(request.user, 'chef'):
+            chef = get_object_or_404(Chef, user=target_user)
+            serializer = ChefSerializer(chef, data=request.data, partial=False)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        # Check if the user is a consumer
+        elif hasattr(request.user, 'consumer'):
+            consumer = get_object_or_404(Consumer, user=target_user)
+            serializer = ConsumerSerializer(consumer, data=request.data, partial=False)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        # If user is neither chef nor consumer, return error
+        return Response(
+            {'detail': 'User profile type not recognized'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    def patch(self, request, user_id):
+        # Only allow user to update their own profile
+        target_user = get_object_or_404(User, id=user_id)
+
+        if request.user.id != target_user.id:
+            return Response(
+                {'detail': 'You can only update your own profile'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        # Check if the user is a chef
+        if hasattr(request.user, 'chef'):
+            chef = get_object_or_404(Chef, user=target_user)
+            serializer = ChefSerializer(chef, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        # Check if the user is a consumer
+        elif hasattr(request.user, 'consumer'):
+            consumer = get_object_or_404(Consumer, user=target_user)
+            serializer = ConsumerSerializer(consumer, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        # If user is neither chef nor consumer, return error
+        return Response(
+            {'detail': 'User profile type not recognized'},
+            status=status.HTTP_400_BAD_REQUEST
+        )

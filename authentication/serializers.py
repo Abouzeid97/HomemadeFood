@@ -38,7 +38,7 @@ class ConsumerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Consumer
         fields = [
-            'id', 'user', 'dietary_preferences', 'allergies',
+            'id', 'user',
             'total_orders', 'created_at', 'updated_at'
         ]
 
@@ -56,9 +56,7 @@ class SignupSerializer(serializers.Serializer):
     bio = serializers.CharField(required=False, allow_blank=True)
     cuisine_specialties = serializers.CharField(required=False, allow_blank=True)
     years_of_experience = serializers.IntegerField(required=False, default=0)
-    # Optional consumer fields
-    dietary_preferences = serializers.CharField(required=False, allow_blank=True)
-    allergies = serializers.CharField(required=False, allow_blank=True)
+
 
     def validate_email(self, value):
         if User.objects.filter(email=value).exists():
@@ -71,8 +69,7 @@ class SignupSerializer(serializers.Serializer):
         bio = validated_data.pop('bio', '')
         cuisine_specialties = validated_data.pop('cuisine_specialties', '')
         years_of_experience = validated_data.pop('years_of_experience', 0)
-        dietary_preferences = validated_data.pop('dietary_preferences', '')
-        allergies = validated_data.pop('allergies', '')
+
 
         password = validated_data.pop('password')
         user = User.objects.create(**validated_data)
@@ -90,8 +87,6 @@ class SignupSerializer(serializers.Serializer):
         else:  # consumer
             Consumer.objects.create(
                 user=user,
-                dietary_preferences=dietary_preferences,
-                allergies=allergies
             )
 
         return user

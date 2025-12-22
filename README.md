@@ -26,7 +26,7 @@ The Homemade Food Authentication Service is a Django-based authentication micros
 ### Core Models
 - `User` - Custom user model using email as the username field
 - `Chef` - Chef-specific profile with ratings, specialties, and experience
-- `Consumer` - Consumer-specific profile with dietary preferences and allergy information
+- `Consumer` - Consumer-specific profile
 - `PaymentCard` - Payment card information storage
 - `Category` - Categories for organizing dishes
 - `Dish` - Menu items created by chefs
@@ -97,7 +97,6 @@ All authentication endpoints are accessible under the `/api/auth/` base path:
 - `POST /api/auth/signup/` - Create a new user
   - Required: `first_name`, `last_name`, `email`, `phone_number`, `password`, `address_longitude`, `address_latitude`, `user_type`
   - Optional (for chefs): `bio`, `cuisine_specialties`, `years_of_experience`
-  - Optional (for consumers): `dietary_preferences`, `allergies`
 
 - `POST /api/auth/login/` - Authenticate user with `email` and `password`
   - Returns authentication token and user profile data
@@ -112,6 +111,19 @@ All authentication endpoints are accessible under the `/api/auth/` base path:
 - `POST /api/auth/cards/` - Add payment card (requires authentication)
   - Fields: `card_number`, `cardholder_name`, `exp_month`, `exp_year`
   - Creating a card sets user `is_active=True`
+
+- `GET /api/auth/profile/<user_id>/` - Retrieve user profile with access controls
+  - Consumer can read chef profiles
+  - Users can read their own profiles
+  - Requires authentication
+
+- `PUT /api/auth/profile/<user_id>/` - Update user's own profile (full update)
+  - Both chefs and consumers can update their own profiles
+  - Requires authentication as the user whose profile is being updated
+
+- `PATCH /api/auth/profile/<user_id>/` - Update user's own profile (partial update)
+  - Both chefs and consumers can update their own profiles
+  - Requires authentication as the user whose profile is being updated
 
 ### Dishes Endpoints
 Dishes endpoints are accessible under the `/api/dishes/` base path:

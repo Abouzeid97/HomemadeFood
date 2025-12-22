@@ -80,8 +80,6 @@ class Chef(models.Model):
 class Consumer(models.Model):
     """Consumer-specific profile extending User."""
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='consumer')
-    dietary_preferences = models.CharField(max_length=255, blank=True, null=True)
-    allergies = models.TextField(blank=True, null=True)
     total_orders = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)

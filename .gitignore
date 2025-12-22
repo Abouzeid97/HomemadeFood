@@ -12,6 +12,7 @@ test_serializers.py
 test_urls.py
 test_models.py
 uml
+orders_module_plan.md
 
 # Distribution / packaging
 .Python
