@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-4kh=maj&*&ywr!%@eef&jm-6%9$$gj081e9^mbt44+%awdgry1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -146,14 +146,7 @@ REST_FRAMEWORK = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # CORS settings for frontend development
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React default
-    "http://127.0.0.1:3000",
-    "http://localhost:8080",  # Vue default
-    "http://127.0.0.1:8080",
-    "http://localhost:8000",  # Development server
-    "http://127.0.0.1:8000",
-]
+CORS_ALLOWED_ORIGINS = ['10.0.2.2']
 
 # Allow credentials to be included in CORS requests
 CORS_ALLOW_CREDENTIALS = True
