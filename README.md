@@ -1,4 +1,4 @@
-# Homemade Food Authentication Service
+# Homemade Food Application
 
 ## Project Overview
 
