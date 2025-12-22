@@ -146,7 +146,15 @@ REST_FRAMEWORK = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # CORS settings for frontend development
-CORS_ALLOWED_ORIGINS = ['10.0.2.2']
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React default
+    "http://127.0.0.1:3000",
+    "http://localhost:8080",  # Vue default
+    "http://127.0.0.1:8080",
+    "http://localhost:8000",  # Development server
+    "http://127.0.0.1:8000",
+    "http://10.0.2.2:8000",  # Angular default
+]
 
 # Allow credentials to be included in CORS requests
 CORS_ALLOW_CREDENTIALS = True
