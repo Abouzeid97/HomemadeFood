@@ -57,11 +57,8 @@ The Homemade Food Authentication Service is a Django-based authentication micros
    python manage.py makemigrations
    python manage.py migrate
    ```
-5. Create a superuser account:
-   ```bash
-   python manage.py createsuperuser
    ```
-6. Start the development server:
+5. Start the development server:
    ```bash
    python manage.py runserver
    ```
