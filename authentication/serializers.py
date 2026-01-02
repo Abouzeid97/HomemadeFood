@@ -63,6 +63,11 @@ class SignupSerializer(serializers.Serializer):
             raise serializers.ValidationError('Email already in use')
         return value
 
+    def validate_phone_number(self, value):
+        if User.objects.filter(phone_number=value).exists():
+            raise serializers.ValidationError('Phone number already in use')
+        return value
+
     def create(self, validated_data):
         user_type = validated_data.pop('user_type')
         # Pop chef/consumer fields
