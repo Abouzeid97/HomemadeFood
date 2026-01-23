@@ -68,3 +68,25 @@ class DishImage(models.Model):
 
     class Meta:
         ordering = ['-is_primary', 'created_at']
+
+
+class DishVarietySection(models.Model):
+    """Section of varieties for a dish (e.g., Size Options, Toppings)"""
+    dish = models.ForeignKey(Dish, on_delete=models.CASCADE, related_name='variety_sections')
+    name = models.CharField(max_length=100)  # e.g., "Size Options"
+    description = models.TextField(blank=True, null=True)
+    is_required = models.BooleanField(default=False)  # Whether customer must select an option
+
+    def __str__(self):
+        return f"{self.name} for {self.dish.name}"
+
+
+class DishVarietyOption(models.Model):
+    """Individual option within a variety section (e.g., Small, Medium, Large)"""
+    section = models.ForeignKey(DishVarietySection, on_delete=models.CASCADE, related_name='options')
+    name = models.CharField(max_length=100)  # e.g., "Small"
+    price_adjustment = models.DecimalField(max_digits=6, decimal_places=2, default=0)  # Additional cost
+    is_available = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.section.name})"

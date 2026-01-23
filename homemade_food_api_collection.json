@@ -960,6 +960,224 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Create Dish Variety Section",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Size Options\",\n  \"description\": \"Choose your preferred size\",\n  \"is_required\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dishes/1/sections/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", "1", "sections", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Dish Variety Section",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Size Options\",\n  \"description\": \"Choose your updated preferred size\",\n  \"is_required\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dishes/sections/1/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", "sections", "1", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Dish Variety Section",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dishes/sections/1/delete/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", "sections", "1", "delete", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Dish Variety Option",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Large\",\n  \"price_adjustment\": 4.00,\n  \"is_available\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dishes/sections/1/options/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", "sections", "1", "options", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Dish Variety Option",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Extra Large\",\n  \"price_adjustment\": 6.00,\n  \"is_available\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dishes/options/1/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", "options", "1", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Dish Variety Option",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dishes/options/1/delete/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", "options", "1", "delete", ""]
+            }
+          },
+          "response": []
         }
       ]
     },

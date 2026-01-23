@@ -4,10 +4,11 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from django.shortcuts import get_object_or_404
 from django.db.models import Q, Avg
-from .models import Category, Dish, DishReview, DishImage
+from .models import Category, Dish, DishReview, DishImage, DishVarietySection, DishVarietyOption
 from .serializers import (
-    CategorySerializer, DishSerializer, DishListSerializer, 
-    DishReviewSerializer, DishImageSerializer
+    CategorySerializer, DishSerializer, DishListSerializer,
+    DishReviewSerializer, DishImageSerializer,
+    DishVarietySectionSerializer, DishVarietyOptionSerializer
 )
 from authentication.models import User
 
@@ -99,12 +100,79 @@ class ChefCategoryListView(generics.ListCreateAPIView):
             return Category.objects.filter(id__in=dish_categories)
         return Category.objects.none()
 
+
+class DishVarietySectionCreateView(generics.CreateAPIView):
+    """Create a new variety section for a dish (only dish creator can access)"""
+    serializer_class = DishVarietySectionSerializer
+    permission_classes = [IsAuthenticated]
+
     def perform_create(self, serializer):
-        # Check if the user is a chef before allowing category creation
-        user_type = self.request.user.get_user_type()
-        if user_type != 'chef':
-            raise permissions.PermissionDenied("Only chefs can create categories")
-        serializer.save()
+        dish_id = self.kwargs['dish_id']
+        dish = get_object_or_404(Dish, id=dish_id)
+
+        # Check if the authenticated user is the dish creator
+        if dish.chef != self.request.user:
+            raise permissions.PermissionDenied("Only the dish creator can add variety sections.")
+
+        serializer.save(dish=dish)
+
+
+class DishVarietySectionUpdateView(generics.UpdateAPIView):
+    """Update a variety section (only dish creator can access)"""
+    serializer_class = DishVarietySectionSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_url_kwarg = 'section_id'
+
+    def get_queryset(self):
+        # Only allow updating sections of dishes created by the authenticated user
+        return DishVarietySection.objects.filter(dish__chef=self.request.user)
+
+
+class DishVarietySectionDeleteView(generics.DestroyAPIView):
+    """Delete a variety section (only dish creator can access)"""
+    permission_classes = [IsAuthenticated]
+    lookup_url_kwarg = 'section_id'
+
+    def get_queryset(self):
+        # Only allow deleting sections of dishes created by the authenticated user
+        return DishVarietySection.objects.filter(dish__chef=self.request.user)
+
+
+class DishVarietyOptionCreateView(generics.CreateAPIView):
+    """Create a new variety option within a section (only dish creator can access)"""
+    serializer_class = DishVarietyOptionSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        section_id = self.kwargs['section_id']
+        section = get_object_or_404(DishVarietySection, id=section_id)
+
+        # Check if the authenticated user is the dish creator
+        if section.dish.chef != self.request.user:
+            raise permissions.PermissionDenied("Only the dish creator can add variety options.")
+
+        serializer.save(section=section)
+
+
+class DishVarietyOptionUpdateView(generics.UpdateAPIView):
+    """Update a variety option (only dish creator can access)"""
+    serializer_class = DishVarietyOptionSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_url_kwarg = 'option_id'
+
+    def get_queryset(self):
+        # Only allow updating options of sections from dishes created by the authenticated user
+        return DishVarietyOption.objects.filter(section__dish__chef=self.request.user)
+
+
+class DishVarietyOptionDeleteView(generics.DestroyAPIView):
+    """Delete a variety option (only dish creator can access)"""
+    permission_classes = [IsAuthenticated]
+    lookup_url_kwarg = 'option_id'
+
+    def get_queryset(self):
+        # Only allow deleting options of sections from dishes created by the authenticated user
+        return DishVarietyOption.objects.filter(section__dish__chef=self.request.user)
 
 
 class ChefCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
