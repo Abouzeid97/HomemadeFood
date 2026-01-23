@@ -59,7 +59,7 @@ The Homemade Food Authentication Service is a Django-based authentication micros
    ```
 5. Seed the database with initial data (optional but recommended for testing):
    ```bash
-   python manage.py loaddata initial_data_fixture.json
+   python manage.py load_initial_data
    ```
    This will create sample users (chefs and consumers), dishes, categories, and other data for testing purposes.
 
