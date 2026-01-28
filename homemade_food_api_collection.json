@@ -539,33 +539,7 @@
           "response": []
         },
         {
-          "name": "List Dishes in Category",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/categories/1/dishes/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "categories", "1", "dishes", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "List All Dishes",
+          "name": "List All Dishes (with optional category filtering and pagination)",
           "event": [
             {
               "listen": "test",
@@ -586,6 +560,74 @@
               "raw": "{{base_url}}/api/dishes/",
               "host": ["{{base_url}}"],
               "path": ["api", "dishes", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Dishes by Category Name (using query parameter)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/dishes/?category_name=Main Course",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", ""],
+              "query": [
+                {
+                  "key": "category_name",
+                  "value": "Main Course"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Dishes with Pagination",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/dishes/?page=1&page_size=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", ""],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "page_size",
+                  "value": "10"
+                }
+              ]
             }
           },
           "response": []
@@ -780,9 +822,9 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/dishes/chef/dishes/",
+              "raw": "{{base_url}}/api/dishes/chef/",
               "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "chef", "dishes", ""]
+              "path": ["api", "dishes", "chef", ""]
             }
           },
           "response": []
@@ -819,9 +861,9 @@
               "raw": "{\n  \"name\": \"Test Dish\",\n  \"description\": \"A delicious test dish\",\n  \"price\": 15.99,\n  \"preparation_time\": 30,\n  \"category_id\": 1\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/dishes/chef/dishes/",
+              "raw": "{{base_url}}/api/dishes/chef/",
               "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "chef", "dishes", ""]
+              "path": ["api", "dishes", "chef", ""]
             }
           },
           "response": []
@@ -858,9 +900,9 @@
               "raw": "{\n  \"name\": \"Updated Test Dish\",\n  \"description\": \"An updated delicious test dish\",\n  \"price\": 17.99,\n  \"preparation_time\": 35,\n  \"category_id\": 1,\n  \"is_available\": true\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/dishes/chef/dishes/1/",
+              "raw": "{{base_url}}/api/dishes/chef/1/",
               "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "chef", "dishes", "1", ""]
+              "path": ["api", "dishes", "chef", "1", ""]
             }
           },
           "response": []
@@ -889,9 +931,9 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/dishes/chef/dishes/1/",
+              "raw": "{{base_url}}/api/dishes/chef/1/",
               "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "chef", "dishes", "1", ""]
+              "path": ["api", "dishes", "chef", "1", ""]
             }
           },
           "response": []
@@ -954,9 +996,9 @@
               "raw": "{\n  \"rating\": 5,\n  \"review_text\": \"Excellent dish! Highly recommended.\"\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/dishes/1/reviews/add/",
+              "raw": "{{base_url}}/api/dishes/1/reviews/",
               "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "reviews", "add", ""]
+              "path": ["api", "dishes", "1", "reviews", ""]
             }
           },
           "response": []
@@ -993,9 +1035,9 @@
               "raw": "{\n  \"name\": \"Size Options\",\n  \"description\": \"Choose your preferred size\",\n  \"is_required\": false\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/dishes/1/sections/",
+              "raw": "{{base_url}}/api/dishes/1/varieties/",
               "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "sections", ""]
+              "path": ["api", "dishes", "1", "varieties", ""]
             }
           },
           "response": []
@@ -1032,9 +1074,9 @@
               "raw": "{\n  \"name\": \"Updated Size Options\",\n  \"description\": \"Choose your updated preferred size\",\n  \"is_required\": true\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/dishes/sections/1/",
+              "raw": "{{base_url}}/api/dishes/1/varieties/1/",
               "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "sections", "1", ""]
+              "path": ["api", "dishes", "1", "varieties", "1", ""]
             }
           },
           "response": []
@@ -1063,9 +1105,9 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/dishes/sections/1/delete/",
+              "raw": "{{base_url}}/api/dishes/1/varieties/1/",
               "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "sections", "1", "delete", ""]
+              "path": ["api", "dishes", "1", "varieties", "1", ""]
             }
           },
           "response": []
@@ -1102,9 +1144,9 @@
               "raw": "{\n  \"name\": \"Large\",\n  \"price_adjustment\": 4.00,\n  \"is_available\": true\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/dishes/sections/1/options/",
+              "raw": "{{base_url}}/api/dishes/1/varieties/1/options/",
               "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "sections", "1", "options", ""]
+              "path": ["api", "dishes", "1", "varieties", "1", "options", ""]
             }
           },
           "response": []
@@ -1141,9 +1183,9 @@
               "raw": "{\n  \"name\": \"Extra Large\",\n  \"price_adjustment\": 6.00,\n  \"is_available\": true\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/dishes/options/1/",
+              "raw": "{{base_url}}/api/dishes/1/varieties/1/options/1/",
               "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "options", "1", ""]
+              "path": ["api", "dishes", "1", "varieties", "1", "options", "1", ""]
             }
           },
           "response": []
@@ -1172,9 +1214,9 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/dishes/options/1/delete/",
+              "raw": "{{base_url}}/api/dishes/1/varieties/1/options/1/",
               "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "options", "1", "delete", ""]
+              "path": ["api", "dishes", "1", "varieties", "1", "options", "1", ""]
             }
           },
           "response": []
