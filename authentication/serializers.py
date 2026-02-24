@@ -21,7 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ChefSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
+    user = UserSerializer()
 
     class Meta:
         model = Chef
@@ -31,9 +31,18 @@ class ChefSerializer(serializers.ModelSerializer):
             'created_at', 'updated_at'
         ]
 
+    def update(self, instance, validated_data):
+        user_data = validated_data.pop('user', None)
+        if user_data:
+            user = instance.user
+            for attr, value in user_data.items():
+                setattr(user, attr, value)
+            user.save()
+        return super().update(instance, validated_data)
+
 
 class ConsumerSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
+    user = UserSerializer()
 
     class Meta:
         model = Consumer
@@ -41,6 +50,15 @@ class ConsumerSerializer(serializers.ModelSerializer):
             'id', 'user',
             'total_orders', 'created_at', 'updated_at'
         ]
+
+    def update(self, instance, validated_data):
+        user_data = validated_data.pop('user', None)
+        if user_data:
+            user = instance.user
+            for attr, value in user_data.items():
+                setattr(user, attr, value)
+            user.save()
+        return super().update(instance, validated_data)
 
 
 class SignupSerializer(serializers.Serializer):
