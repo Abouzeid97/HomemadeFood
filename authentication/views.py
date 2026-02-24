@@ -80,19 +80,22 @@ class LogoutView(APIView):
 
 
 class PasswordResetRequestView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
         email = request.data.get('email')
         if not email:
             return Response({'detail': 'Email is required'}, status=status.HTTP_400_BAD_REQUEST)
-        try:
-            user = User.objects.get(email=email)
-        except User.DoesNotExist:
-            return Response({'detail': 'If that email exists, a reset token will be sent.'}, status=status.HTTP_200_OK)
-
-        uid = urlsafe_base64_encode(force_bytes(user.pk))
-        token = default_token_generator.make_token(user)
+        
+        # Verify the authenticated user matches the provided email
+        if request.user.email != email:
+            return Response(
+                {'detail': 'Email does not match authenticated user'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
+        uid = urlsafe_base64_encode(force_bytes(request.user.pk))
+        token = default_token_generator.make_token(request.user)
         # For development we return token in response. In production, email this link.
         return Response({'uid': uid, 'token': token}, status=status.HTTP_200_OK)
 
