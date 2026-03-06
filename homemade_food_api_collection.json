@@ -181,6 +181,10 @@
               {
                 "key": "Content-Type",
                 "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
               }
             ],
             "body": {
@@ -1474,6 +1478,152 @@
               "raw": "{{base_url}}/api/dishes/1/images/1/",
               "host": ["{{base_url}}"],
               "path": ["api", "dishes", "1", "images", "1", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Consumer Homepage",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has categories\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('categories');",
+                  "});",
+                  "",
+                  "pm.test(\"Response has featured_dishes\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('featured_dishes');",
+                  "});",
+                  "",
+                  "pm.test(\"Response has top_chefs\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('top_chefs');",
+                  "});",
+                  "",
+                  "pm.test(\"Response has new_dishes\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('new_dishes');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/dishes/home/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", "home", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Dishes",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/dishes/?search=pizza",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", ""],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "pizza"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Dishes by Chef Name",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/dishes/?search=John",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", ""],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "John"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter Dishes by Category and Search",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/dishes/?search=chicken&category_name=Mexican",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", ""],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "chicken"
+                },
+                {
+                  "key": "category_name",
+                  "value": "Mexican"
+                }
+              ]
             }
           },
           "response": []

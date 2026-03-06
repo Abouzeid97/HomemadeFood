@@ -1,4 +1,5 @@
 from rest_framework import generics, status, permissions
+from rest_framework.views import APIView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
@@ -8,10 +9,12 @@ from .models import Category, Dish, DishReview, DishImage, DishVarietySection, D
 from .serializers import (
     CategorySerializer, DishSerializer, DishListSerializer,
     DishReviewSerializer, DishImageSerializer,
-    DishVarietySectionSerializer, DishVarietyOptionSerializer
+    DishVarietySectionSerializer, DishVarietyOptionSerializer,
+    HomePageSerializer, CategoryHomeSerializer, FeaturedDishSerializer,
+    TopChefSerializer, NewDishSerializer
 )
 from .pagination import StandardResultsSetPagination
-from authentication.models import User
+from authentication.models import User, Chef
 
 
 class CategoryListView(generics.ListAPIView):
@@ -33,6 +36,7 @@ class CategoryDetailView(generics.RetrieveAPIView):
 class DishListView(generics.ListAPIView):
     """
     List all available dishes with optional filtering:
+    - ?search={query}: Search by dish name or chef name
     - ?category_name={category_name}: Filter by category name
     - ?is_available=true/false: Filter by availability
     - ?min_price={price}&max_price={price}: Filter by price range
@@ -43,6 +47,15 @@ class DishListView(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = Dish.objects.filter(is_available=True).select_related('chef', 'category').prefetch_related('reviews')
+
+        # Search functionality - search by dish name or chef name
+        search_query = self.request.query_params.get('search', None)
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query) | 
+                Q(chef__first_name__icontains=search_query) |
+                Q(chef__last_name__icontains=search_query)
+            )
 
         # Apply category filter by name if specified
         category_name = self.request.query_params.get('category_name', None)
@@ -376,3 +389,41 @@ class DishImageUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
         context = super().get_serializer_context()
         context['request'] = self.request
         return context
+
+
+class HomePageView(APIView):
+    """
+    Homepage endpoint returning aggregated data for consumer home page.
+    Located in dishes app since homepage is primarily dish-focused.
+    """
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get(self, request):
+        # Get categories with available dishes
+        categories = Category.objects.all()[:6]  # Limit to 6 categories
+
+        # Get featured dishes (highest rated, available)
+        featured_dishes = Dish.objects.filter(
+            is_available=True
+        ).annotate(
+            avg_rating=Avg('reviews__rating')
+        ).order_by('-avg_rating')[:6]  # Top 6 rated dishes
+
+        # Get top chefs (highest rating)
+        top_chefs = Chef.objects.filter(
+            is_verified=True
+        ).order_by('-rating')[:5]  # Top 5 chefs
+
+        # Get new dishes (recently added)
+        new_dishes = Dish.objects.filter(
+            is_available=True
+        ).select_related('chef').order_by('-created_at')[:6]  # Latest 6 dishes
+
+        serializer = HomePageSerializer({
+            'categories': categories,
+            'featured_dishes': featured_dishes,
+            'top_chefs': top_chefs,
+            'new_dishes': new_dishes
+        })
+
+        return Response(serializer.data)
