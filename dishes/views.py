@@ -323,3 +323,56 @@ class DishVarietyOptionRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyA
             id=option_id,
             section__dish__chef=self.request.user
         )
+
+
+class DishImageCreateView(generics.CreateAPIView):
+    """Upload images for a dish (only dish creator can access)"""
+    serializer_class = DishImageSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        dish_id = self.kwargs['dish_id']
+        dish = get_object_or_404(Dish, id=dish_id)
+
+        # Check if the authenticated user is the dish creator
+        if dish.chef != self.request.user:
+            raise permissions.PermissionDenied("Only the dish creator can add images.")
+
+        serializer.save(dish=dish)
+
+
+class DishImageListView(generics.ListAPIView):
+    """List all images for a dish"""
+    serializer_class = DishImageSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        dish_id = self.kwargs['dish_id']
+        return DishImage.objects.filter(dish_id=dish_id)
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
+
+
+class DishImageUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    """Get, update, or delete a specific dish image (only dish creator can modify)"""
+    serializer_class = DishImageSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        dish_id = self.kwargs['dish_id']
+        image_id = self.kwargs['image_id']
+        queryset = DishImage.objects.filter(dish_id=dish_id, id=image_id)
+        
+        # For write operations, ensure only dish creator can modify
+        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
+            queryset = queryset.filter(dish__chef=self.request.user)
+        
+        return queryset
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context

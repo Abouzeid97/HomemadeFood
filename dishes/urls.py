@@ -22,4 +22,9 @@ urlpatterns = [
     path('<int:dish_id>/varieties/<int:section_id>/', views.DishVarietySectionRetrieveUpdateDestroyView.as_view(), name='dish-variety-section-detail'),
     path('<int:dish_id>/varieties/<int:section_id>/options/', views.DishVarietyOptionListCreateView.as_view(), name='dish-variety-options-list-create'),
     path('<int:dish_id>/varieties/<int:section_id>/options/<int:option_id>/', views.DishVarietyOptionRetrieveUpdateDestroyView.as_view(), name='dish-variety-option-detail'),
+
+    # Dish Image endpoints
+    path('<int:dish_id>/images/', views.DishImageListView.as_view(), name='dish-images'),
+    path('<int:dish_id>/images/create/', views.DishImageCreateView.as_view(), name='dish-image-create'),
+    path('<int:dish_id>/images/<int:image_id>/', views.DishImageUpdateDeleteView.as_view(), name='dish-image-detail'),
 ]

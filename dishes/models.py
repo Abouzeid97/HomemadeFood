@@ -58,7 +58,7 @@ class DishReview(models.Model):
 class DishImage(models.Model):
     """Image model for dishes (optional enhancement)"""
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE, related_name='images')
-    image_url = models.URLField()
+    image = models.ImageField(upload_to='dishes/%Y/%m/%d/', blank=True, null=True)
     is_primary = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)

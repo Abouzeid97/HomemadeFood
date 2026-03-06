@@ -231,3 +231,32 @@ class UserProfileView(APIView):
             {'detail': 'User profile type not recognized'},
             status=status.HTTP_400_BAD_REQUEST
         )
+
+
+class ProfilePictureUploadView(APIView):
+    """Upload profile picture for authenticated user"""
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        if 'profile_picture' not in request.FILES:
+            return Response(
+                {'detail': 'No image provided'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        user.profile_picture = request.FILES['profile_picture']
+        user.save()
+        serializer = UserSerializer(user, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def delete(self, request):
+        """Remove profile picture"""
+        user = request.user
+        if user.profile_picture:
+            user.profile_picture.delete()
+            user.profile_picture = None
+            user.save()
+        return Response(
+            {'detail': 'Profile picture removed'},
+            status=status.HTTP_200_OK
+        )

@@ -7,14 +7,23 @@ User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     user_type = serializers.SerializerMethodField()
+    profile_picture_url = serializers.SerializerMethodField()
 
     class Meta:
         model = User
         fields = [
             'id', 'first_name', 'last_name', 'email', 'phone_number',
-            'profile_picture_url', 'address_longitude', 'address_latitude',
+            'profile_picture', 'profile_picture_url', 'address_longitude', 'address_latitude',
             'created_at', 'updated_at', 'is_active', 'user_type'
         ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def get_profile_picture_url(self, obj):
+        """Return full URL for the profile picture"""
+        request = self.context.get('request')
+        if obj.profile_picture and request:
+            return request.build_absolute_uri(obj.profile_picture.url)
+        return None
 
     def get_user_type(self, obj):
         return obj.get_user_type()

@@ -480,6 +480,83 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Upload Profile Picture",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has profile_picture_url\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('profile_picture_url');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "profile_picture",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/profile-picture/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "profile-picture", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Profile Picture",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/profile-picture/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "profile-picture", ""]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -1217,6 +1294,186 @@
               "raw": "{{base_url}}/api/dishes/1/varieties/1/options/1/",
               "host": ["{{base_url}}"],
               "path": ["api", "dishes", "1", "varieties", "1", "options", "1", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Dish Images",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/dishes/1/images/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", "1", "images", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Dish Image",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has image_url\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('image_url');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "is_primary",
+                  "value": "true",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dishes/1/images/create/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", "1", "images", "create", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Dish Image Detail",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/dishes/1/images/1/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", "1", "images", "1", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Dish Image",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "is_primary",
+                  "value": "true",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/dishes/1/images/1/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", "1", "images", "1", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Dish Image",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dishes/1/images/1/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dishes", "1", "images", "1", ""]
             }
           },
           "response": []

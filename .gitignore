@@ -13,6 +13,7 @@ test_urls.py
 test_models.py
 uml
 orders_module_plan.md
+media
 
 # Distribution / packaging
 .Python
