@@ -17,7 +17,6 @@ class Command(BaseCommand):
             first_name="John",
             last_name="Chef",
             phone_number="+1234567890",
-            profile_picture_url="https://example.com/john-chef.jpg",
             address_longitude=-122.4194,
             address_latitude=37.7749,
             is_active=True,
@@ -30,7 +29,6 @@ class Command(BaseCommand):
             first_name="Maria",
             last_name="Gonzalez",
             phone_number="+1987654321",
-            profile_picture_url="https://example.com/maria-chef.jpg",
             address_longitude=-122.3301,
             address_latitude=37.6879,
             is_active=True,
@@ -43,7 +41,6 @@ class Command(BaseCommand):
             first_name="Sarah",
             last_name="Johnson",
             phone_number="+1555123456",
-            profile_picture_url="https://example.com/sarah-consumer.jpg",
             address_longitude=-122.2711,
             address_latitude=37.8044,
             is_active=True,
@@ -56,7 +53,6 @@ class Command(BaseCommand):
             first_name="Mike",
             last_name="Davis",
             phone_number="+1555987654",
-            profile_picture_url="https://example.com/mike-consumer.jpg",
             address_longitude=-122.4473,
             address_latitude=37.7622,
             is_active=True,
@@ -181,25 +177,25 @@ class Command(BaseCommand):
         # Create dish images
         DishImage.objects.create(
             dish=spaghetti_carbonara,
-            image_url="https://example.com/spaghetti-carbonara.jpg",
+            image=None,
             is_primary=True
         )
 
         DishImage.objects.create(
             dish=margherita_pizza,
-            image_url="https://example.com/margherita-pizza.jpg",
+            image=None,
             is_primary=True
         )
 
         DishImage.objects.create(
             dish=chicken_tacos,
-            image_url="https://example.com/chicken-tacos.jpg",
+            image=None,
             is_primary=True
         )
 
         DishImage.objects.create(
             dish=beef_burrito,
-            image_url="https://example.com/beef-burrito.jpg",
+            image=None,
             is_primary=True
         )
 

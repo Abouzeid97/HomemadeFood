@@ -354,21 +354,6 @@ class DishImageCreateView(generics.CreateAPIView):
         serializer.save(dish=dish)
 
 
-class DishImageListView(generics.ListAPIView):
-    """List all images for a dish"""
-    serializer_class = DishImageSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
-
-    def get_queryset(self):
-        dish_id = self.kwargs['dish_id']
-        return DishImage.objects.filter(dish_id=dish_id)
-
-    def get_serializer_context(self):
-        context = super().get_serializer_context()
-        context['request'] = self.request
-        return context
-
-
 class DishImageUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     """Get, update, or delete a specific dish image (only dish creator can modify)"""
     serializer_class = DishImageSerializer

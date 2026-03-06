@@ -20,12 +20,18 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class DishImageSerializer(serializers.ModelSerializer):
     """Serializer for DishImage model"""
-    image = serializers.ImageField()
+    image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = DishImage
-        fields = ['id', 'image', 'is_primary', 'created_at', 'updated_at']
+        fields = ['id', 'image_url', 'is_primary', 'created_at', 'updated_at']
         read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def get_image_url(self, obj):
+        """Return full URL for the image"""
+        if obj.image:
+            return obj.image.url
+        return None
 
 
 class DishReviewSerializer(serializers.ModelSerializer):

@@ -741,14 +741,27 @@
               "response": []
             },
             {
-              "name": "List All Dishes (with optional category filtering and pagination)",
+              "name": "List All Dishes",
               "event": [
                 {
                   "listen": "test",
                   "script": {
                     "exec": [
-                      "pm.test(\"Status test\", function () {",
+                      "pm.test(\"Status is 200\", function () {",
                       "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Response is paginated\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property(\"count\");",
+                      "    pm.expect(jsonData).to.have.property(\"next\");",
+                      "    pm.expect(jsonData).to.have.property(\"previous\");",
+                      "    pm.expect(jsonData).to.have.property(\"results\");",
+                      "});",
+                      "",
+                      "pm.test(\"Results is an array\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData.results).to.be.an(\"array\");",
                       "});"
                     ],
                     "type": "text/javascript"
@@ -767,90 +780,58 @@
                     "api",
                     "dishes",
                     ""
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "List Dishes by Category Name (using query parameter)",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test(\"Status test\", function () {",
-                      "    pm.response.to.have.status(200);",
-                      "});"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/api/dishes/?category_name=Main Course",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "api",
-                    "dishes",
-                    ""
                   ],
                   "query": [
+                    {
+                      "key": "search",
+                      "value": "",
+                      "description": "Search dishes by dish name or chef name (first/last). Case-insensitive partial match.",
+                      "disabled": false
+                    },
                     {
                       "key": "category_name",
-                      "value": "Main Course"
-                    }
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "List Dishes with Pagination",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test(\"Status test\", function () {",
-                      "    pm.response.to.have.status(200);",
-                      "});"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/api/dishes/?page=1&page_size=10",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "api",
-                    "dishes",
-                    ""
-                  ],
-                  "query": [
+                      "value": "",
+                      "description": "Filter dishes by category name. Case-insensitive partial match (e.g., \"Italian\" matches \"Italian Cuisine\").",
+                      "disabled": false
+                    },
+                    {
+                      "key": "min_price",
+                      "value": "",
+                      "description": "Filter dishes with price greater than or equal to this value (decimal number).",
+                      "disabled": false
+                    },
+                    {
+                      "key": "max_price",
+                      "value": "",
+                      "description": "Filter dishes with price less than or equal to this value (decimal number).",
+                      "disabled": false
+                    },
+                    {
+                      "key": "is_available",
+                      "value": "",
+                      "description": "Filter by availability status. Use \"true\" for available dishes or \"false\" for unavailable.",
+                      "disabled": false
+                    },
                     {
                       "key": "page",
-                      "value": "1"
+                      "value": "",
+                      "description": "Page number for pagination. Default is 1.",
+                      "disabled": false
                     },
                     {
                       "key": "page_size",
-                      "value": "10"
+                      "value": "",
+                      "description": "Number of results per page. Controls how many dishes are returned in each page.",
+                      "disabled": false
                     }
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "description": {
+                "content": "## Dishes List Endpoint\n\nList all available dishes with optional filtering and pagination.\n\n### Query Parameters\n\n| Parameter | Type | Required | Example | Description |\n|-----------|------|----------|---------|-------------|\n| `search` | string | No | `?search=pizza` | Search by dish name or chef name |\n| `category_name` | string | No | `?category_name=Italian` | Filter by category name |\n| `min_price` | decimal | No | `?min_price=10` | Minimum price filter |\n| `max_price` | decimal | No | `?max_price=25` | Maximum price filter |\n| `is_available` | boolean | No | `?is_available=true` | Filter by availability |\n| `page` | integer | No | `?page=2` | Page number for pagination |\n| `page_size` | integer | No | `?page_size=10` | Number of items per page |\n\n### Example Requests\n\n**Get all dishes:**\n```\nGET /api/dishes/\n```\n\n**Search by dish name:**\n```\nGET /api/dishes/?search=pizza\n```\n\n**Search by chef name:**\n```\nGET /api/dishes/?search=John\n```\n\n**Filter by category:**\n```\nGET /api/dishes/?category_name=Italian\n```\n\n**Filter by price range:**\n```\nGET /api/dishes/?min_price=10&max_price=25\n```\n\n**With pagination:**\n```\nGET /api/dishes/?page=2&page_size=10\n```\n\n**Combined filters:**\n```\nGET /api/dishes/?search=pizza&category_name=Italian&min_price=10&max_price=25&page=1&page_size=10\n```\n\n### Response Format\n\n```json\n{\n  \"count\": 50,\n  \"next\": \"/api/dishes/?page=2\",\n  \"previous\": null,\n  \"results\": [\n    {\n      \"id\": 1,\n      \"name\": \"Spaghetti Carbonara\",\n      \"price\": \"15.99\",\n      \"is_available\": true,\n      \"preparation_time\": 20,\n      \"chef\": {\n        \"id\": 1,\n        \"first_name\": \"John\",\n        \"last_name\": \"Chef\"\n      },\n      \"category\": {\n        \"id\": 1,\n        \"name\": \"Italian\"\n      },\n      \"created_at\": \"2026-02-24T22:32:30.758770Z\",\n      \"average_rating\": 4.5,\n      \"image\": null\n    }\n  ]\n}\n```\n\n### Response Fields\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `count` | integer | Total number of dishes matching the filter |\n| `next` | string/null | URL to next page (null if last page) |\n| `previous` | string/null | URL to previous page (null if first page) |\n| `results` | array | Array of dish objects |\n\n### Notes\n\n- All query parameters are optional and can be combined\n- Search searches both dish name and chef name (first/last)\n- Category name search is case-insensitive partial match\n- Default page size is determined by server configuration",
+                "type": "text/markdown"
+              }
             },
             {
               "name": "Get Dish Detail",
@@ -913,75 +894,6 @@
                     "dishes",
                     "1",
                     "reviews",
-                    ""
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "List Dish Images",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test(\"Status test\", function () {",
-                      "    pm.response.to.have.status(200);",
-                      "});"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/api/dishes/1/images/",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "api",
-                    "dishes",
-                    "1",
-                    "images",
-                    ""
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Get Dish Image Detail",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test(\"Status test\", function () {",
-                      "    pm.response.to.have.status(200);",
-                      "});"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/api/dishes/1/images/1/",
-                  "host": [
-                    "{{base_url}}"
-                  ],
-                  "path": [
-                    "api",
-                    "dishes",
-                    "1",
-                    "images",
-                    "1",
                     ""
                   ]
                 }
