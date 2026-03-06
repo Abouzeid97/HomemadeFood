@@ -138,14 +138,10 @@ class DishSerializer(serializers.ModelSerializer):
 
 class CategoryHomeSerializer(serializers.ModelSerializer):
     """Lightweight category serializer for homepage"""
-    dish_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Category
-        fields = ['id', 'name', 'description', 'dish_count']
-
-    def get_dish_count(self, obj):
-        return obj.dishes.filter(is_available=True).count()
+        fields = ['id', 'name']
 
 
 class FeaturedDishSerializer(DishListSerializer):
@@ -164,8 +160,7 @@ class FeaturedDishSerializer(DishListSerializer):
         return {
             'id': obj.chef.id,
             'first_name': obj.chef.first_name,
-            'last_name': obj.chef.last_name,
-            'profile_picture': obj.chef.profile_picture.url if obj.chef.profile_picture else None
+            'last_name': obj.chef.last_name
         }
 
 
@@ -193,7 +188,7 @@ class NewDishSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Dish
-        fields = ['id', 'name', 'description', 'price', 'chef_name', 'image', 'created_at']
+        fields = ['id', 'name', 'price', 'chef_name', 'image', 'created_at']
 
     def get_chef_name(self, obj):
         return f"{obj.chef.first_name} {obj.chef.last_name}"

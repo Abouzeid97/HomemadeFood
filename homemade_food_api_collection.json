@@ -42,8 +42,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/auth/signup/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "signup", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "signup",
+                ""
+              ]
             }
           },
           "response": []
@@ -82,8 +89,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/auth/signup/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "signup", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "signup",
+                ""
+              ]
             }
           },
           "response": []
@@ -123,8 +137,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/auth/login/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "login", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login",
+                ""
+              ]
             }
           },
           "response": []
@@ -154,8 +175,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/auth/logout/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "logout", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "logout",
+                ""
+              ]
             }
           },
           "response": []
@@ -193,8 +221,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/auth/password-reset/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "password-reset", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "password-reset",
+                ""
+              ]
             }
           },
           "response": []
@@ -228,8 +263,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/auth/password-reset-confirm/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "password-reset-confirm", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "password-reset-confirm",
+                ""
+              ]
             }
           },
           "response": []
@@ -267,8 +309,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/auth/cards/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "cards", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "cards",
+                ""
+              ]
             }
           },
           "response": []
@@ -303,8 +352,16 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/auth/profile/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "profile", "1", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile",
+                "1",
+                ""
+              ]
             }
           },
           "response": []
@@ -347,8 +404,16 @@
             },
             "url": {
               "raw": "{{base_url}}/api/auth/profile/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "profile", "1", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile",
+                "1",
+                ""
+              ]
             }
           },
           "response": []
@@ -391,8 +456,16 @@
             },
             "url": {
               "raw": "{{base_url}}/api/auth/profile/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "profile", "1", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile",
+                "1",
+                ""
+              ]
             }
           },
           "response": []
@@ -435,8 +508,16 @@
             },
             "url": {
               "raw": "{{base_url}}/api/auth/profile/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "profile", "1", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile",
+                "1",
+                ""
+              ]
             }
           },
           "response": []
@@ -479,8 +560,16 @@
             },
             "url": {
               "raw": "{{base_url}}/api/auth/profile/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "profile", "1", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile",
+                "1",
+                ""
+              ]
             }
           },
           "response": []
@@ -525,8 +614,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/auth/profile-picture/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "profile-picture", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile-picture",
+                ""
+              ]
             }
           },
           "response": []
@@ -556,8 +652,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/auth/profile-picture/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "profile-picture", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "profile-picture",
+                ""
+              ]
             }
           },
           "response": []
@@ -568,1065 +671,1327 @@
       "name": "Dishes",
       "item": [
         {
-          "name": "List All Categories",
-          "event": [
+          "name": "Public",
+          "item": [
             {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/categories/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "categories", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get Category Detail",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/categories/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "categories", "1", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "List All Dishes (with optional category filtering and pagination)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "List Dishes by Category Name (using query parameter)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/?category_name=Main Course",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", ""],
-              "query": [
+              "name": "List All Categories",
+              "event": [
                 {
-                  "key": "category_name",
-                  "value": "Main Course"
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
                 }
-              ]
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/categories/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "categories",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Category Detail",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/categories/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "categories",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List All Dishes (with optional category filtering and pagination)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List Dishes by Category Name (using query parameter)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/?category_name=Main Course",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "category_name",
+                      "value": "Main Course"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List Dishes with Pagination",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/?page=1&page_size=10",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Dish Detail",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Dish Reviews",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/reviews/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "reviews",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "List Dish Images",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/images/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "images",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Dish Image Detail",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/images/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "images",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Consumer Homepage",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Response has categories\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('categories');",
+                      "});",
+                      "",
+                      "pm.test(\"Response has featured_dishes\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('featured_dishes');",
+                      "});",
+                      "",
+                      "pm.test(\"Response has top_chefs\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('top_chefs');",
+                      "});",
+                      "",
+                      "pm.test(\"Response has new_dishes\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('new_dishes');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/home/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "home",
+                    ""
+                  ]
+                }
+              },
+              "response": []
             }
-          },
-          "response": []
+          ]
         },
         {
-          "name": "List Dishes with Pagination",
-          "event": [
+          "name": "Chef",
+          "item": [
             {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/?page=1&page_size=10",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", ""],
-              "query": [
+              "name": "List Chef Categories",
+              "event": [
                 {
-                  "key": "page",
-                  "value": "1"
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/categories/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    "categories",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Category",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Main Course\",\n  \"description\": \"Delicious main courses\"\n}"
                 },
-                {
-                  "key": "page_size",
-                  "value": "10"
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/categories/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    "categories",
+                    ""
+                  ]
                 }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get Dish Detail",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "List Chef Categories",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/chef/categories/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "chef", "categories", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Create Category",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(201);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
               },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Main Course\",\n  \"description\": \"Delicious main courses\"\n}"
+              "response": []
             },
-            "url": {
-              "raw": "{{base_url}}/api/dishes/chef/categories/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "chef", "categories", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Update Category",
-          "event": [
             {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Updated Main Course\",\n  \"description\": \"Updated description\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/dishes/chef/categories/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "chef", "categories", "1", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Delete Category",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(204);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/chef/categories/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "chef", "categories", "1", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "List Chef Dishes",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/chef/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "chef", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Create Dish",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(201);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Test Dish\",\n  \"description\": \"A delicious test dish\",\n  \"price\": 15.99,\n  \"preparation_time\": 30,\n  \"category_id\": 1\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/dishes/chef/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "chef", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Update Dish",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Updated Test Dish\",\n  \"description\": \"An updated delicious test dish\",\n  \"price\": 17.99,\n  \"preparation_time\": 35,\n  \"category_id\": 1,\n  \"is_available\": true\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/dishes/chef/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "chef", "1", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Delete Dish",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(204);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/chef/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "chef", "1", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get Dish Reviews",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/reviews/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "reviews", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Add Dish Review",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(201);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"rating\": 5,\n  \"review_text\": \"Excellent dish! Highly recommended.\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/reviews/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "reviews", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Create Dish Variety Section",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(201);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Size Options\",\n  \"description\": \"Choose your preferred size\",\n  \"is_required\": false\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/varieties/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "varieties", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Update Dish Variety Section",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Updated Size Options\",\n  \"description\": \"Choose your updated preferred size\",\n  \"is_required\": true\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/varieties/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "varieties", "1", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Delete Dish Variety Section",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(204);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/varieties/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "varieties", "1", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Create Dish Variety Option",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(201);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Large\",\n  \"price_adjustment\": 4.00,\n  \"is_available\": true\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/varieties/1/options/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "varieties", "1", "options", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Update Dish Variety Option",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Extra Large\",\n  \"price_adjustment\": 6.00,\n  \"is_available\": true\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/varieties/1/options/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "varieties", "1", "options", "1", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Delete Dish Variety Option",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(204);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/varieties/1/options/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "varieties", "1", "options", "1", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "List Dish Images",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/images/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "images", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Upload Dish Image",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(201);",
-                  "});",
-                  "",
-                  "pm.test(\"Response has image_url\", function () {",
-                  "    var jsonData = pm.response.json();",
-                  "    pm.expect(jsonData).to.have.property('image_url');",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
+              "name": "Update Category",
+              "event": [
                 {
-                  "key": "image",
-                  "type": "file",
-                  "src": []
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Main Course\",\n  \"description\": \"Updated description\"\n}"
                 },
-                {
-                  "key": "is_primary",
-                  "value": "true",
-                  "type": "text"
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/categories/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    "categories",
+                    "1",
+                    ""
+                  ]
                 }
-              ]
+              },
+              "response": []
             },
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/images/create/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "images", "create", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get Dish Image Detail",
-          "event": [
             {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/images/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "images", "1", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Update Dish Image",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
+              "name": "Delete Category",
+              "event": [
                 {
-                  "key": "image",
-                  "type": "file",
-                  "src": []
-                },
-                {
-                  "key": "is_primary",
-                  "value": "true",
-                  "type": "text"
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(204);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
                 }
-              ]
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/categories/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    "categories",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
             },
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/images/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "images", "1", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Delete Dish Image",
-          "event": [
             {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(204);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Token {{auth_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/1/images/1/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "1", "images", "1", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get Consumer Homepage",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "",
-                  "pm.test(\"Response has categories\", function () {",
-                  "    var jsonData = pm.response.json();",
-                  "    pm.expect(jsonData).to.have.property('categories');",
-                  "});",
-                  "",
-                  "pm.test(\"Response has featured_dishes\", function () {",
-                  "    var jsonData = pm.response.json();",
-                  "    pm.expect(jsonData).to.have.property('featured_dishes');",
-                  "});",
-                  "",
-                  "pm.test(\"Response has top_chefs\", function () {",
-                  "    var jsonData = pm.response.json();",
-                  "    pm.expect(jsonData).to.have.property('top_chefs');",
-                  "});",
-                  "",
-                  "pm.test(\"Response has new_dishes\", function () {",
-                  "    var jsonData = pm.response.json();",
-                  "    pm.expect(jsonData).to.have.property('new_dishes');",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/home/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", "home", ""]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Search Dishes",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/?search=pizza",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", ""],
-              "query": [
+              "name": "List Chef Dishes",
+              "event": [
                 {
-                  "key": "search",
-                  "value": "pizza"
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
                 }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Search Dishes by Chef Name",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
                 ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/?search=John",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", ""],
-              "query": [
-                {
-                  "key": "search",
-                  "value": "John"
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    ""
+                  ]
                 }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Filter Dishes by Category and Search",
-          "event": [
+              },
+              "response": []
+            },
             {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status test\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/dishes/?search=chicken&category_name=Mexican",
-              "host": ["{{base_url}}"],
-              "path": ["api", "dishes", ""],
-              "query": [
+              "name": "Create Dish",
+              "event": [
                 {
-                  "key": "search",
-                  "value": "chicken"
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test Dish\",\n  \"description\": \"A delicious test dish\",\n  \"price\": 15.99,\n  \"preparation_time\": 30,\n  \"category_id\": 1\n}"
                 },
-                {
-                  "key": "category_name",
-                  "value": "Mexican"
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    ""
+                  ]
                 }
-              ]
+              },
+              "response": []
+            },
+            {
+              "name": "Update Dish",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Test Dish\",\n  \"description\": \"An updated delicious test dish\",\n  \"price\": 17.99,\n  \"preparation_time\": 35,\n  \"category_id\": 1,\n  \"is_available\": true\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Dish",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(204);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/chef/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "chef",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Dish Variety Section",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Size Options\",\n  \"description\": \"Choose your preferred size\",\n  \"is_required\": false\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/varieties/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "varieties",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Dish Variety Section",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Size Options\",\n  \"description\": \"Choose your updated preferred size\",\n  \"is_required\": true\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/varieties/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "varieties",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Dish Variety Section",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(204);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/varieties/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "varieties",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Dish Variety Option",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Large\",\n  \"price_adjustment\": 4.00,\n  \"is_available\": true\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/varieties/1/options/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "varieties",
+                    "1",
+                    "options",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Dish Variety Option",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Extra Large\",\n  \"price_adjustment\": 6.00,\n  \"is_available\": true\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/varieties/1/options/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "varieties",
+                    "1",
+                    "options",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Dish Variety Option",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(204);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/varieties/1/options/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "varieties",
+                    "1",
+                    "options",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Upload Dish Image",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});",
+                      "",
+                      "pm.test(\"Response has image_url\", function () {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.expect(jsonData).to.have.property('image_url');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "src": []
+                    },
+                    {
+                      "key": "is_primary",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/images/create/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "images",
+                    "create",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Dish Image",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "src": []
+                    },
+                    {
+                      "key": "is_primary",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/images/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "images",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Dish Image",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(204);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/images/1/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "images",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Search Dishes by Chef Name",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/?search=John",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "John"
+                    }
+                  ]
+                }
+              },
+              "response": []
             }
-          },
-          "response": []
+          ]
+        },
+        {
+          "name": "Consumer",
+          "item": [
+            {
+              "name": "Add Dish Review",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token {{auth_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rating\": 5,\n  \"review_text\": \"Excellent dish! Highly recommended.\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/1/reviews/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    "1",
+                    "reviews",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Search Dishes",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/?search=pizza",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "pizza"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Filter Dishes by Category and Search",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status test\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/dishes/?search=chicken&category_name=Mexican",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "dishes",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "chicken"
+                    },
+                    {
+                      "key": "category_name",
+                      "value": "Mexican"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
         }
       ]
     },
@@ -1658,8 +2023,14 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/orders/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "orders", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                ""
+              ]
             }
           },
           "response": []
@@ -1697,8 +2068,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/orders/create/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "orders", "create", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "create",
+                ""
+              ]
             }
           },
           "response": []
@@ -1728,8 +2106,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/orders/123e4567-e89b-12d3-a456-426614174000/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "orders", "123e4567-e89b-12d3-a456-426614174000", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "123e4567-e89b-12d3-a456-426614174000",
+                ""
+              ]
             }
           },
           "response": []
@@ -1767,8 +2152,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/orders/123e4567-e89b-12d3-a456-426614174000/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "orders", "123e4567-e89b-12d3-a456-426614174000", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "123e4567-e89b-12d3-a456-426614174000",
+                ""
+              ]
             }
           },
           "response": []
@@ -1781,14 +2173,18 @@
       "listen": "prerequest",
       "script": {
         "type": "text/javascript",
-        "exec": [""]
+        "exec": [
+          ""
+        ]
       }
     },
     {
       "listen": "test",
       "script": {
         "type": "text/javascript",
-        "exec": [""]
+        "exec": [
+          ""
+        ]
       }
     }
   ],
