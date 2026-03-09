@@ -35,13 +35,23 @@ class DishImageSerializer(serializers.ModelSerializer):
 
 
 class DishReviewSerializer(serializers.ModelSerializer):
-    """Serializer for DishReview model"""
+    """Serializer for DishReview model - full version with all fields"""
     customer = UserSerializer(read_only=True)
-    
+
     class Meta:
         model = DishReview
         fields = ['id', 'dish', 'customer', 'rating', 'review_text', 'created_at', 'updated_at']
         read_only_fields = ['id', 'customer', 'created_at', 'updated_at']
+
+
+class DishReviewPreviewSerializer(serializers.ModelSerializer):
+    """Lightweight review serializer for dish detail preview"""
+    user_name = serializers.CharField(source='customer.first_name', read_only=True)
+    
+    class Meta:
+        model = DishReview
+        fields = ['id', 'user_name', 'rating', 'review_text', 'created_at']
+        read_only_fields = ['id', 'created_at']
 
 
 class DishListSerializer(serializers.ModelSerializer):
@@ -102,9 +112,49 @@ class DishVarietySectionSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description', 'is_required', 'options']
 
 
+class ChefInfoSerializer(serializers.ModelSerializer):
+    """Lightweight chef info serializer for dish detail response"""
+    name = serializers.SerializerMethodField()
+    specialties = serializers.SerializerMethodField()
+    rating = serializers.SerializerMethodField()
+    total_reviews = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = User
+        fields = ['id', 'name', 'rating', 'total_reviews', 'specialties', 'profile_picture']
+        read_only_fields = ['id']
+    
+    def get_name(self, obj):
+        return f"Chef {obj.first_name} {obj.last_name}"
+    
+    def get_specialties(self, obj):
+        """Get chef's cuisine specialties as a list"""
+        if hasattr(obj, 'chef'):
+            chef_profile = obj.chef
+            if chef_profile and chef_profile.cuisine_specialties:
+                return [s.strip() for s in chef_profile.cuisine_specialties.split(',')]
+        return []
+    
+    def get_rating(self, obj):
+        """Get chef's rating from profile"""
+        if hasattr(obj, 'chef'):
+            chef_profile = obj.chef
+            if chef_profile:
+                return chef_profile.rating
+        return None
+    
+    def get_total_reviews(self, obj):
+        """Get chef's total review count from profile"""
+        if hasattr(obj, 'chef'):
+            chef_profile = obj.chef
+            if chef_profile:
+                return chef_profile.total_reviews
+        return 0
+
+
 class DishSerializer(serializers.ModelSerializer):
-    """Serializer for Dish model"""
-    chef = UserSerializer(read_only=True)
+    """Serializer for Dish model - Full detail view"""
+    chef = ChefInfoSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
     category_id = serializers.PrimaryKeyRelatedField(
         queryset=Category.objects.all(),
@@ -112,25 +162,40 @@ class DishSerializer(serializers.ModelSerializer):
         source='category'
     )
     images = DishImageSerializer(many=True, read_only=True)
-    reviews = DishReviewSerializer(many=True, read_only=True)
+    reviews_preview = serializers.SerializerMethodField()
     variety_sections = DishVarietySectionSerializer(many=True, read_only=True)
-    average_rating = serializers.SerializerMethodField()
+    rating_avg = serializers.SerializerMethodField()
+    reviews_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Dish
         fields = [
             'id', 'chef', 'name', 'description', 'price', 'is_available',
             'preparation_time', 'category', 'category_id', 'images',
-            'reviews', 'variety_sections', 'created_at', 'updated_at', 'average_rating'
+            'reviews_preview', 'variety_sections', 'created_at', 'updated_at',
+            'rating_avg', 'reviews_count'
         ]
         read_only_fields = ['id', 'chef', 'created_at', 'updated_at']
 
-    def get_average_rating(self, obj):
+    def get_rating_avg(self, obj):
         """Calculate average rating for the dish"""
-        reviews = obj.reviews.all()
-        if reviews:
-            return sum(review.rating for review in reviews) / len(reviews)
+        if hasattr(obj, 'rating_avg') and obj.rating_avg is not None:
+            return round(float(obj.rating_avg), 2)
+        return 0.0
+
+    def get_reviews_count(self, obj):
+        """Get total number of reviews"""
+        if hasattr(obj, 'reviews_count') and obj.reviews_count is not None:
+            return obj.reviews_count
         return 0
+
+    def get_reviews_preview(self, obj):
+        """Get latest 3 reviews as preview"""
+        if hasattr(obj, 'latest_reviews'):
+            reviews = obj.latest_reviews
+        else:
+            reviews = obj.reviews.select_related('customer').order_by('-created_at')[:3]
+        return DishReviewPreviewSerializer(reviews, many=True).data
 
     def create(self, validated_data):
         """Create a new dish with the authenticated chef"""

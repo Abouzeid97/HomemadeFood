@@ -170,9 +170,13 @@ class DishesAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_dish_reviews(self):
-        """Test getting dish reviews"""
+        """Test getting dish reviews with pagination"""
         url = reverse('dish-reviews', kwargs={'dish_id': self.dish.pk})
         response = self.client.get(url)
-        
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data, [])
+        # Response is now paginated
+        self.assertIn('count', response.data)
+        self.assertIn('results', response.data)
+        self.assertEqual(response.data['count'], 0)
+        self.assertEqual(response.data['results'], [])

@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from django.shortcuts import get_object_or_404
-from django.db.models import Q, Avg
+from django.db.models import Q, Avg, Count
 from .models import Category, Dish, DishReview, DishImage, DishVarietySection, DishVarietyOption
 from .serializers import (
     CategorySerializer, DishSerializer, DishListSerializer,
@@ -80,9 +80,33 @@ class DishListView(generics.ListAPIView):
 
 class DishDetailView(generics.RetrieveAPIView):
     """Get detailed information about a specific dish"""
-    queryset = Dish.objects.all().select_related('chef', 'category').prefetch_related('reviews', 'images')
     serializer_class = DishSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        """
+        Optimized queryset with annotations for rating and review count.
+        Prefetches only the latest 3 reviews for preview and chef profile.
+        """
+        from django.db.models import Prefetch
+        from authentication.models import Chef
+        
+        return Dish.objects.select_related('chef', 'category').prefetch_related(
+            'images',
+            Prefetch(
+                'chef__chef',
+                queryset=Chef.objects.all()
+            ),
+            Prefetch(
+                'reviews',
+                queryset=DishReview.objects.select_related('customer')
+                    .order_by('-created_at')[:3],
+                to_attr='latest_reviews'
+            )
+        ).annotate(
+            rating_avg=Avg('reviews__rating'),
+            reviews_count=Count('reviews')
+        )
 
 
 class ChefCategoryListView(generics.ListCreateAPIView):
@@ -226,13 +250,19 @@ class ChefDishDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ReviewListCreateView(generics.ListCreateAPIView):
-    """List all reviews for a dish or create a new review"""
+    """
+    List all reviews for a dish with pagination or create a new review.
+    
+    Pagination:
+    - GET /api/dishes/{id}/reviews/?page=1&page_size=10
+    """
     serializer_class = DishReviewSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
-        dish_id = self.kwargs['dish_id']  # Matches the URL parameter name
-        return DishReview.objects.filter(dish_id=dish_id).select_related('customer')
+        dish_id = self.kwargs['dish_id']
+        return DishReview.objects.filter(dish_id=dish_id).select_related('customer').order_by('-created_at')
 
     def perform_create(self, serializer):
         dish_id = self.kwargs['dish_id']  # Matches the URL parameter name
