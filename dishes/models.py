@@ -29,6 +29,7 @@ class Dish(models.Model):
     preparation_time = models.PositiveIntegerField(help_text="Preparation time in minutes")
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
+    
 
     def __str__(self):
         return self.name
