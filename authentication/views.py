@@ -1,12 +1,14 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, permissions
+from rest_framework import status, permissions, generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework.authtoken.models import Token
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 from .serializers import (
     SignupSerializer, LoginSerializer, UserSerializer, PaymentCardSerializer,
@@ -14,6 +16,9 @@ from .serializers import (
 )
 from .models import PaymentCard, Chef, Consumer
 from .permissions import UserProfilePermission
+
+# Import pagination from dishes app
+from dishes.pagination import StandardResultsSetPagination
 
 User = get_user_model()
 
@@ -284,3 +289,48 @@ class ChefToggleOnlineView(APIView):
             'is_online': chef.is_online,
             'chef': serializer.data
         }, status=status.HTTP_200_OK)
+
+
+class ChefListView(generics.ListAPIView):
+    """
+    List all chefs with optional filtering:
+    - ?search={query}: Search by chef name or bio
+    - ?is_online=true/false: Filter by online status
+    - ?is_verified=true/false: Filter by verification status
+    - ?min_rating={rating}: Filter by minimum rating
+    """
+    serializer_class = ChefSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = StandardResultsSetPagination
+
+    def get_queryset(self):
+        queryset = Chef.objects.select_related('user').all()
+
+        # Search functionality - search by chef name or bio
+        search_query = self.request.query_params.get('search', None)
+        if search_query:
+            queryset = queryset.filter(
+                Q(user__first_name__icontains=search_query) |
+                Q(user__last_name__icontains=search_query) |
+                Q(bio__icontains=search_query) |
+                Q(cuisine_specialties__icontains=search_query)
+            )
+
+        # Filter by online status
+        is_online = self.request.query_params.get('is_online', None)
+        if is_online is not None:
+            is_online = is_online.lower() == 'true'
+            queryset = queryset.filter(is_online=is_online)
+
+        # Filter by verification status
+        is_verified = self.request.query_params.get('is_verified', None)
+        if is_verified is not None:
+            is_verified = is_verified.lower() == 'true'
+            queryset = queryset.filter(is_verified=is_verified)
+
+        # Filter by minimum rating
+        min_rating = self.request.query_params.get('min_rating', None)
+        if min_rating is not None:
+            queryset = queryset.filter(rating__gte=min_rating)
+
+        return queryset
