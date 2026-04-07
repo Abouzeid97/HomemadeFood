@@ -1,4 +1,4 @@
-from rest_framework import generics, status, permissions
+from rest_framework import generics, permissions, exceptions
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -38,6 +38,7 @@ class DishListView(generics.ListAPIView):
     List all available dishes with optional filtering:
     - ?search={query}: Search by dish name or chef name
     - ?category_name={category_name}: Filter by category name
+    - ?chef-id={chef_id}: Filter by chef ID
     - ?is_available=true/false: Filter by availability
     - ?min_price={price}&max_price={price}: Filter by price range
     """
@@ -52,7 +53,7 @@ class DishListView(generics.ListAPIView):
         search_query = self.request.query_params.get('search', None)
         if search_query:
             queryset = queryset.filter(
-                Q(name__icontains=search_query) | 
+                Q(name__icontains=search_query) |
                 Q(chef__first_name__icontains=search_query) |
                 Q(chef__last_name__icontains=search_query)
             )
@@ -61,6 +62,11 @@ class DishListView(generics.ListAPIView):
         category_name = self.request.query_params.get('category_name', None)
         if category_name is not None:
             queryset = queryset.filter(category__name__icontains=category_name)
+
+        # Apply chef-id filter if specified
+        chef_id = self.request.query_params.get('chef-id', None)
+        if chef_id is not None:
+            queryset = queryset.filter(chef_id=chef_id)
 
         # Apply additional filters
         is_available = self.request.query_params.get('is_available', None)
@@ -232,7 +238,7 @@ class ChefDishListView(generics.ListCreateAPIView):
         # Check if the user is a chef before allowing dish creation
         user_type = self.request.user.get_user_type()
         if user_type != 'chef':
-            raise permissions.PermissionDenied("Only chefs can create dishes")
+            raise exceptions.PermissionDenied("Only chefs can create dishes")
         serializer.save(chef=self.request.user)
 
 
