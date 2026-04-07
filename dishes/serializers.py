@@ -71,11 +71,21 @@ class DishListSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at']
 
     def get_chef(self, obj):
-        return {
+        chef_data = {
             'id': obj.chef.id,
             'first_name': obj.chef.first_name,
             'last_name': obj.chef.last_name
         }
+        # Add is_online status if chef profile exists
+        if hasattr(obj.chef, 'chef'):
+            chef_profile = obj.chef.chef
+            if chef_profile:
+                chef_data['is_online'] = chef_profile.is_online
+            else:
+                chef_data['is_online'] = False
+        else:
+            chef_data['is_online'] = False
+        return chef_data
 
     def get_category(self, obj):
         return {
@@ -118,15 +128,16 @@ class ChefInfoSerializer(serializers.ModelSerializer):
     specialties = serializers.SerializerMethodField()
     rating = serializers.SerializerMethodField()
     total_reviews = serializers.SerializerMethodField()
-    
+    is_online = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = ['id', 'name', 'rating', 'total_reviews', 'specialties', 'profile_picture']
+        fields = ['id', 'name', 'rating', 'total_reviews', 'specialties', 'profile_picture', 'is_online']
         read_only_fields = ['id']
-    
+
     def get_name(self, obj):
         return f"Chef {obj.first_name} {obj.last_name}"
-    
+
     def get_specialties(self, obj):
         """Get chef's cuisine specialties as a list"""
         if hasattr(obj, 'chef'):
@@ -134,7 +145,7 @@ class ChefInfoSerializer(serializers.ModelSerializer):
             if chef_profile and chef_profile.cuisine_specialties:
                 return [s.strip() for s in chef_profile.cuisine_specialties.split(',')]
         return []
-    
+
     def get_rating(self, obj):
         """Get chef's rating from profile"""
         if hasattr(obj, 'chef'):
@@ -142,7 +153,7 @@ class ChefInfoSerializer(serializers.ModelSerializer):
             if chef_profile:
                 return chef_profile.rating
         return None
-    
+
     def get_total_reviews(self, obj):
         """Get chef's total review count from profile"""
         if hasattr(obj, 'chef'):
@@ -150,6 +161,14 @@ class ChefInfoSerializer(serializers.ModelSerializer):
             if chef_profile:
                 return chef_profile.total_reviews
         return 0
+
+    def get_is_online(self, obj):
+        """Get chef's online status from profile"""
+        if hasattr(obj, 'chef'):
+            chef_profile = obj.chef
+            if chef_profile:
+                return chef_profile.is_online
+        return False
 
 
 class DishSerializer(serializers.ModelSerializer):

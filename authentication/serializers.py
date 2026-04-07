@@ -29,7 +29,7 @@ class ChefSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'user', 'rating', 'total_reviews', 'bio',
             'cuisine_specialties', 'years_of_experience', 'is_verified',
-            'created_at', 'updated_at'
+            'is_online', 'created_at', 'updated_at'
         ]
 
     def update(self, instance, validated_data):

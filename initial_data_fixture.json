@@ -82,6 +82,7 @@
       "cuisine_specialties": "Italian, Mediterranean",
       "years_of_experience": 10,
       "is_verified": true,
+      "is_online": true,
       "created_at": "2023-01-15T10:00:00Z",
       "updated_at": "2023-01-15T10:00:00Z"
     }
@@ -97,6 +98,7 @@
       "cuisine_specialties": "Mexican, Tex-Mex",
       "years_of_experience": 8,
       "is_verified": true,
+      "is_online": true,
       "created_at": "2023-02-20T14:30:00Z",
       "updated_at": "2023-02-20T14:30:00Z"
     }
@@ -344,7 +346,7 @@
       "dish": 1,
       "name": "Size Options",
       "description": "Choose your preferred portion size",
-      "is_required": false
+      "is_required": true
     }
   },
   {
@@ -477,6 +479,7 @@
       "cuisine_specialties": "French, Mediterranean, Fusion",
       "years_of_experience": 12,
       "is_verified": true,
+      "is_online": false,
       "created_at": "2023-05-15T10:00:00Z",
       "updated_at": "2023-05-15T10:00:00Z"
     }
@@ -511,6 +514,7 @@
       "cuisine_specialties": "Japanese, Sushi, Asian",
       "years_of_experience": 15,
       "is_verified": true,
+      "is_online": true,
       "created_at": "2023-05-15T10:00:00Z",
       "updated_at": "2023-05-15T10:00:00Z"
     }
@@ -545,6 +549,7 @@
       "cuisine_specialties": "Indian, Curry, Vegetarian",
       "years_of_experience": 9,
       "is_verified": true,
+      "is_online": false,
       "created_at": "2023-05-15T10:00:00Z",
       "updated_at": "2023-05-15T10:00:00Z"
     }
@@ -579,6 +584,7 @@
       "cuisine_specialties": "Middle Eastern, Lebanese, Turkish",
       "years_of_experience": 11,
       "is_verified": true,
+      "is_online": true,
       "created_at": "2023-05-15T10:00:00Z",
       "updated_at": "2023-05-15T10:00:00Z"
     }
@@ -613,6 +619,7 @@
       "cuisine_specialties": "Eastern European, Romanian, Pastries",
       "years_of_experience": 7,
       "is_verified": false,
+      "is_online": false,
       "created_at": "2023-05-15T10:00:00Z",
       "updated_at": "2023-05-15T10:00:00Z"
     }

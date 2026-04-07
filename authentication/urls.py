@@ -3,6 +3,7 @@ from .views import (
     SignupView, LoginView, LogoutView,
     PasswordResetRequestView, PasswordResetConfirmView,
     PaymentCardCreateView, UserProfileView, ProfilePictureUploadView,
+    ChefToggleOnlineView,
 )
 
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     path('cards/', PaymentCardCreateView.as_view(), name='payment_card_create'),
     path('profile/<int:user_id>/', UserProfileView.as_view(), name='user_profile'),
     path('profile-picture/', ProfilePictureUploadView.as_view(), name='profile_picture_upload'),
+    path('chef/toggle-online/', ChefToggleOnlineView.as_view(), name='chef_toggle_online'),
 ]

@@ -70,6 +70,7 @@ class Chef(models.Model):
     cuisine_specialties = models.CharField(max_length=255, blank=True, null=True)
     years_of_experience = models.PositiveIntegerField(default=0)
     is_verified = models.BooleanField(default=False)
+    is_online = models.BooleanField(default=False, help_text="Whether the chef is currently available to accept orders")
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 

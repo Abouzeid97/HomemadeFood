@@ -260,3 +260,27 @@ class ProfilePictureUploadView(APIView):
             {'detail': 'Profile picture removed'},
             status=status.HTTP_200_OK
         )
+
+
+class ChefToggleOnlineView(APIView):
+    """Toggle chef's online status (available to accept orders)"""
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        # Check if the authenticated user is a chef
+        if not hasattr(request.user, 'chef'):
+            return Response(
+                {'detail': 'Only chefs can toggle online status'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        chef = request.user.chef
+        chef.is_online = not chef.is_online
+        chef.save()
+
+        serializer = ChefSerializer(chef)
+        return Response({
+            'detail': f'Chef is now {"online" if chef.is_online else "offline"}',
+            'is_online': chef.is_online,
+            'chef': serializer.data
+        }, status=status.HTTP_200_OK)
