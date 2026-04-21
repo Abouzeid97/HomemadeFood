@@ -2130,6 +2130,12 @@
                 "exec": [
                   "pm.test(\"Status test\", function () {",
                   "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is paginated\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property(\"count\");",
+                  "    pm.expect(jsonData).to.have.property(\"results\");",
                   "});"
                 ],
                 "type": "text/javascript"
@@ -2153,10 +2159,46 @@
                 "api",
                 "orders",
                 ""
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "",
+                  "description": "Filter by order status (pending, accepted, out_for_delivery, delivered, cancelled, rejected)",
+                  "disabled": true
+                },
+                {
+                  "key": "date_from",
+                  "value": "",
+                  "description": "Filter orders from this date onwards (YYYY-MM-DD)",
+                  "disabled": true
+                },
+                {
+                  "key": "date_to",
+                  "value": "",
+                  "description": "Filter orders up to this date (YYYY-MM-DD)",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "",
+                  "description": "Page number for pagination",
+                  "disabled": true
+                },
+                {
+                  "key": "page_size",
+                  "value": "",
+                  "description": "Number of results per page (default: 20, max: 100)",
+                  "disabled": true
+                }
               ]
             }
           },
-          "response": []
+          "response": [],
+          "description": {
+            "content": "## List Orders\n\nList orders filtered by user role (consumer sees own orders, chef sees received orders).\n\n### Query Parameters\n\n| Parameter | Type | Required | Example | Description |\n|-----------|------|----------|---------|-------------|\n| `status` | string | No | `?status=pending` | Filter by order status |\n| `date_from` | date | No | `?date_from=2024-01-01` | Filter from date |\n| `date_to` | date | No | `?date_to=2024-12-31` | Filter to date |\n| `page` | integer | No | `?page=2` | Page number |\n| `page_size` | integer | No | `?page_size=10` | Results per page |\n\n### Response Format\n\n```json\n{\n  \"count\": 5,\n  \"next\": null,\n  \"previous\": null,\n  \"results\": [\n    {\n      \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"customer_name\": \"John Doe\",\n      \"chef_name\": \"Chef Mario\",\n      \"status\": \"pending\",\n      \"total_amount\": \"35.98\",\n      \"created_at\": \"2024-01-15T10:00:00Z\",\n      \"items_count\": 2,\n      \"estimated_ready_time\": \"2024-01-15T10:30:00Z\"\n    }\n  ]\n}\n```",
+            "type": "text/markdown"
+          }
         },
         {
           "name": "Create Order",
@@ -2167,6 +2209,11 @@
                 "exec": [
                   "pm.test(\"Status test\", function () {",
                   "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has order_id\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('order_id');",
                   "});"
                 ],
                 "type": "text/javascript"
@@ -2187,7 +2234,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"chef\": 2,\n  \"delivery_address\": \"123 Main St, City, State\",\n  \"delivery_longitude\": -122.4194,\n  \"delivery_latitude\": 37.7749,\n  \"estimated_delivery_time\": \"2023-12-25T18:00:00Z\",\n  \"special_instructions\": \"Leave at door\",\n  \"items\": [\n    {\n      \"dish\": 1,\n      \"quantity\": 2,\n      \"special_requests\": \"No onions\"\n    }\n  ]\n}"
+              "raw": "{\n  \"chef_id\": 2,\n  \"delivery_address\": \"123 Main St, City, State\",\n  \"delivery_longitude\": -122.4194,\n  \"delivery_latitude\": 37.7749,\n  \"special_instructions\": \"Leave at door\",\n  \"items\": [\n    {\n      \"dish_id\": 1,\n      \"quantity\": 2,\n      \"special_requests\": \"No onions\",\n      \"variety_selections\": [\n        {\"section_id\": 1, \"option_id\": 1},\n        {\"section_id\": 2, \"option_id\": 3}\n      ]\n    },\n    {\n      \"dish_id\": 3,\n      \"quantity\": 1,\n      \"special_requests\": \"Extra spicy\"\n    }\n  ]\n}"
             },
             "url": {
               "raw": "{{base_url}}/api/orders/create/",
@@ -2202,7 +2249,11 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "description": {
+            "content": "## Create Order\n\nPlace a new order (consumer only). All items must belong to the same chef.\n\n### Request Body\n\n```json\n{\n  \"chef_id\": 2,\n  \"delivery_address\": \"123 Main St\",\n  \"delivery_longitude\": -122.4194,\n  \"delivery_latitude\": 37.7749,\n  \"special_instructions\": \"Optional notes\",\n  \"items\": [\n    {\n      \"dish_id\": 1,\n      \"quantity\": 2,\n      \"special_requests\": \"No onions\",\n      \"variety_selections\": [\n        {\"section_id\": 1, \"option_id\": 1}\n      ]\n    }\n  ]\n}\n```\n\n### Fields\n\n| Field | Type | Required | Description |\n|-------|------|----------|-------------|\n| `chef_id` | integer | Yes | Chef who will fulfill the order |\n| `delivery_address` | string | Yes | Full delivery address |\n| `delivery_longitude` | decimal | No | Delivery location longitude |\n| `delivery_latitude` | decimal | No | Delivery location latitude |\n| `special_instructions` | string | No | General order notes |\n| `items` | array | Yes | List of order items |\n| `items[].dish_id` | integer | Yes | Dish to order |\n| `items[].quantity` | integer | Yes | Quantity (min: 1) |\n| `items[].special_requests` | string | No | Per-item notes |\n| `items[].variety_selections` | array | No | Size/options selections |\n| `variety_selections[].section_id` | integer | Yes | Variety section ID |\n| `variety_selections[].option_id` | integer | Yes | Variety option ID |\n\n### Response\n\nReturns full order detail with `order_id` (UUID), items, pricing, and timestamps.",
+            "type": "text/markdown"
+          }
         },
         {
           "name": "Get Order Detail",
@@ -2213,6 +2264,11 @@
                 "exec": [
                   "pm.test(\"Status test\", function () {",
                   "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has items array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('items');",
                   "});"
                 ],
                 "type": "text/javascript"
@@ -2240,7 +2296,11 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "description": {
+            "content": "## Get Order Detail\n\nGet full order details including all items and variety selections.\n\n### URL Parameters\n\n| Parameter | Type | Required | Example | Description |\n|-----------|------|----------|---------|-------------|\n| `order_id` | UUID | Yes | `/api/orders/{uuid}/` | The order UUID |\n\n### Response Format\n\n```json\n{\n  \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"customer\": 3,\n  \"customer_name\": \"John Doe\",\n  \"chef\": 2,\n  \"chef_name\": \"Chef Mario\",\n  \"status\": \"accepted\",\n  \"subtotal\": \"25.98\",\n  \"delivery_fee\": \"10.00\",\n  \"total_amount\": \"35.98\",\n  \"estimated_preparation_minutes\": 30,\n  \"estimated_ready_time\": \"2024-01-15T10:30:00Z\",\n  \"delivery_address\": \"123 Main St\",\n  \"special_instructions\": \"Leave at door\",\n  \"created_at\": \"2024-01-15T10:00:00Z\",\n  \"accepted_at\": \"2024-01-15T10:05:00Z\",\n  \"items\": [\n    {\n      \"id\": 1,\n      \"dish_name\": \"Spaghetti Carbonara\",\n      \"dish_base_price\": \"15.99\",\n      \"quantity\": 2,\n      \"unit_price\": \"15.99\",\n      \"item_total\": \"31.98\",\n      \"special_requests\": \"No onions\",\n      \"variety_selections\": [\n        {\n          \"section_name\": \"Size Options\",\n          \"option_name\": \"Large\",\n          \"price_adjustment\": \"4.00\"\n        }\n      ]\n    }\n  ]\n}\n```",
+            "type": "text/markdown"
+          }
         },
         {
           "name": "Update Order Status",
@@ -2251,6 +2311,11 @@
                 "exec": [
                   "pm.test(\"Status test\", function () {",
                   "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Status updated\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.status).to.equal('accepted');",
                   "});"
                 ],
                 "type": "text/javascript"
@@ -2271,10 +2336,10 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"status\": \"confirmed\"\n}"
+              "raw": "{\n  \"status\": \"accepted\"\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/orders/123e4567-e89b-12d3-a456-426614174000/",
+              "raw": "{{base_url}}/api/orders/123e4567-e89b-12d3-a456-426614174000/status/",
               "host": [
                 "{{base_url}}"
               ],
@@ -2282,11 +2347,201 @@
                 "api",
                 "orders",
                 "123e4567-e89b-12d3-a456-426614174000",
+                "status",
                 ""
               ]
             }
           },
-          "response": []
+          "response": [],
+          "description": {
+            "content": "## Update Order Status\n\nTransition order to a new status. Only valid transitions allowed per status flow.\n\n### Valid Status Transitions\n\n| From | To | Actor |\n|------|----|-------|\n| `pending` | `accepted` | Chef |\n| `pending` | `rejected` | Chef |\n| `pending` | `cancelled` | Chef or Consumer |\n| `accepted` | `out_for_delivery` | Chef |\n| `accepted` | `cancelled` | Chef |\n| `out_for_delivery` | `delivered` | Chef |\n\n### Request Body\n\n```json\n{\n  \"status\": \"accepted\",\n  \"cancellation_reason\": \"Optional reason if cancelling\"\n}\n```\n\n### Fields\n\n| Field | Type | Required | Description |\n|-------|------|----------|-------------|\n| `status` | string | Yes | New status |\n| `cancellation_reason` | string | No | Reason for cancellation |\n\n### WebSocket Events\n\nOn success, broadcasts:\n- `status_update` to order-specific group\n- `notification` to affected user",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "name": "List Notifications",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/orders/notifications/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "notifications",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "description": {
+            "content": "## List Notifications\n\nGet all order notifications for the authenticated user.\n\n### Response Format\n\n```json\n[\n  {\n    \"id\": 1,\n    \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n    \"notification_type\": \"order_accepted\",\n    \"notification_type_display\": \"Order Accepted\",\n    \"message\": \"Your order has been accepted.\",\n    \"is_read\": false,\n    \"created_at\": \"2024-01-15T10:05:00Z\"\n  }\n]\n```\n\n### Notification Types\n\n| Type | Description |\n|------|-------------|\n| `order_placed` | New order placed |\n| `order_accepted` | Chef accepted order |\n| `order_rejected` | Chef rejected order |\n| `order_cancelled` | Order cancelled |\n| `preparation_reminder` | Reminder to chef |\n| `out_for_delivery` | Order on the way |\n| `delivered` | Order delivered |",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "name": "Mark Notification as Read",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Notification is read\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.is_read).to.equal(true);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/api/orders/notifications/1/read/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "notifications",
+                "1",
+                "read",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "description": {
+            "content": "## Mark Notification as Read\n\nMark a single notification as read.\n\n### URL Parameters\n\n| Parameter | Type | Required | Description |\n|-----------|------|----------|-------------|\n| `pk` | integer | Yes | Notification ID |\n\n### Response\n\nReturns the updated notification object with `is_read: true`.",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "name": "Cancel Expired Orders (Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status test\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has cancelled_count\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('cancelled_count');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{auth_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/api/orders/cancel-expired/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "cancel-expired",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "description": {
+            "content": "## Cancel Expired Orders\n\nManually trigger auto-cancellation for pending orders older than 5 minutes.\n\n**Requires admin/staff authentication.**\n\n### Response\n\n```json\n{\n  \"cancelled_count\": 3\n}\n```\n\n### Notes\n\n- Only cancels orders with `status=pending` and `created_at > 5 minutes ago`\n- Sends notification to affected customers\n- In production, this runs automatically via Celery beat every minute",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "name": "WebSocket: Connect to Orders",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "ws://localhost:8000/ws/orders/",
+              "protocol": "ws",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "ws",
+                "orders",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "description": {
+            "content": "## WebSocket: Orders Real-Time Updates\n\nConnect to receive real-time order notifications and status updates.\n\n**URL:** `ws://localhost:8000/ws/orders/`\n\n### Authentication\n\nUses Django session/auth middleware. Must be authenticated.\n\n### Client Messages\n\n**Subscribe to order updates:**\n```json\n{\n  \"action\": \"subscribe_order\",\n  \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\"\n}\n```\n\n**Unsubscribe from order:**\n```json\n{\n  \"action\": \"unsubscribe_order\",\n  \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\"\n}\n```\n\n### Server Messages\n\n**New notification:**\n```json\n{\n  \"type\": \"notification\",\n  \"data\": {\n    \"notification_type\": \"order_accepted\",\n    \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n    \"message\": \"Your order has been accepted.\",\n    \"created_at\": \"2024-01-15T10:05:00Z\"\n  }\n}\n```\n\n**Status update:**\n```json\n{\n  \"type\": \"status_update\",\n  \"data\": {\n    \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n    \"status\": \"accepted\",\n    \"updated_at\": \"2024-01-15T10:05:00Z\",\n    \"estimated_ready_time\": \"2024-01-15T10:35:00Z\"\n  }\n}\n```\n\n**New order (chef only):**\n```json\n{\n  \"type\": \"new_order\",\n  \"data\": {\n    \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n    \"customer_name\": \"John Doe\",\n    \"total_amount\": \"35.98\",\n    \"items_count\": 2,\n    \"message\": \"New order from John Doe\",\n    \"created_at\": \"2024-01-15T10:00:00Z\"\n  }\n}\n```\n\n**Subscription confirmed:**\n```json\n{\n  \"type\": \"subscribed\",\n  \"order_id\": \"123e4567-e89b-12d3-a456-426614174000\"\n}\n```\n\n### JavaScript Example\n\n```javascript\nconst ws = new WebSocket('ws://localhost:8000/ws/orders/');\n\nws.onopen = () => {\n  console.log('Connected');\n  ws.send(JSON.stringify({\n    action: 'subscribe_order',\n    order_id: '123e4567-e89b-12d3-a456-426614174000'\n  }));\n};\n\nws.onmessage = (event) => {\n  const message = JSON.parse(event.data);\n  console.log(message.type, message.data);\n};\n```\n\n### Groups\n\n| Group | Purpose |\n|-------|---------|\n| `user_{user_id}` | Personal notifications |\n| `order_{order_id}` | Order-specific status updates |",
+            "type": "text/markdown"
+          }
         }
       ]
     }

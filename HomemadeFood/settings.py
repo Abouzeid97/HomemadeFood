@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -79,6 +80,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'HomemadeFood.wsgi.application'
+
+# ASGI application (required for WebSocket support)
+ASGI_APPLICATION = 'HomemadeFood.asgi.application'
+
+# Channel layer configuration (Redis for production, in-memory for development)
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 
 # Database
