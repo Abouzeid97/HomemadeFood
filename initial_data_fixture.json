@@ -151,8 +151,8 @@
     "model": "dishes.category",
     "pk": 1,
     "fields": {
-      "name": "Italian",
-      "description": "Authentic Italian cuisine",
+      "name": "Soups",
+      "description": "Warm and comforting soups for all tastes",
       "created_at": "2023-01-20T10:00:00Z",
       "updated_at": "2023-01-20T10:00:00Z"
     }
@@ -161,8 +161,8 @@
     "model": "dishes.category",
     "pk": 2,
     "fields": {
-      "name": "Mexican",
-      "description": "Traditional Mexican dishes",
+      "name": "Salads",
+      "description": "Fresh and healthy salads with a variety of ingredients",
       "created_at": "2023-01-20T10:00:00Z",
       "updated_at": "2023-01-20T10:00:00Z"
     }
@@ -171,8 +171,8 @@
     "model": "dishes.category",
     "pk": 3,
     "fields": {
-      "name": "Asian",
-      "description": "Fusion Asian cuisine",
+      "name": "Sandwiches",
+      "description": "Quick and tasty sandwiches for any time of day",
       "created_at": "2023-01-20T10:00:00Z",
       "updated_at": "2023-01-20T10:00:00Z"
     }
@@ -181,8 +181,88 @@
     "model": "dishes.category",
     "pk": 4,
     "fields": {
-      "name": "American",
-      "description": "Classic American comfort food",
+      "name": "Pasta",
+      "description": "Delicious pasta dishes with rich sauces and flavors",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 5,
+    "fields": {
+      "name": "Pizza",
+      "description": "Classic and modern pizzas with a variety of toppings",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 6,
+    "fields": {
+      "name": "Seafood",
+      "description": "Fresh seafood dishes prepared with rich flavors",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 7,
+    "fields": {
+      "name": "Meat Dishes",
+      "description": "Hearty meat dishes cooked with spices and sauces",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 8,
+    "fields": {
+      "name": "Chicken Dishes",
+      "description": "Tasty chicken meals with different cooking styles",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 9,
+    "fields": {
+      "name": "Baked Goods",
+      "description": "Freshly baked breads, pastries, and savory treats",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 10,
+    "fields": {
+      "name": "Desserts",
+      "description": "Sweet desserts to satisfy every craving",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 11,
+    "fields": {
+      "name": "Drinks",
+      "description": "Refreshing beverages, hot and cold",
+      "created_at": "2023-01-20T10:00:00Z",
+      "updated_at": "2023-01-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "dishes.category",
+    "pk": 12,
+    "fields": {
+      "name": "Others",
+      "description": "Miscellaneous dishes that don't fit other categories",
       "created_at": "2023-01-20T10:00:00Z",
       "updated_at": "2023-01-20T10:00:00Z"
     }
@@ -194,7 +274,7 @@
       "chef": 1,
       "name": "Spaghetti Carbonara",
       "description": "Classic Roman pasta with eggs, cheese, pancetta and pepper",
-      "category": 1,
+      "category": 4,
       "price": "15.99",
       "is_available": true,
       "preparation_time": 20,
@@ -209,7 +289,7 @@
       "chef": 1,
       "name": "Margherita Pizza",
       "description": "Traditional Neapolitan pizza with tomato, mozzarella and basil",
-      "category": 1,
+      "category": 5,
       "price": "18.50",
       "is_available": true,
       "preparation_time": 25,
@@ -224,7 +304,7 @@
       "chef": 2,
       "name": "Chicken Tacos",
       "description": "Soft corn tortillas filled with seasoned chicken, cilantro and onion",
-      "category": 2,
+      "category": 8,
       "price": "12.99",
       "is_available": true,
       "preparation_time": 15,
@@ -239,7 +319,7 @@
       "chef": 2,
       "name": "Beef Burrito",
       "description": "Large flour tortilla with seasoned beef, rice, beans, cheese and salsa",
-      "category": 2,
+      "category": 7,
       "price": "14.99",
       "is_available": true,
       "preparation_time": 20,
@@ -631,7 +711,7 @@
       "chef": 1,
       "name": "Risotto ai Funghi",
       "description": "Creamy Italian risotto with porcini mushrooms and parmesan",
-      "category": 1,
+      "category": 4,
       "price": "19.99",
       "is_available": true,
       "preparation_time": 35,
@@ -657,7 +737,7 @@
       "chef": 1,
       "name": "Tiramisu",
       "description": "Classic Italian dessert with espresso-soaked ladyfingers and mascarpone",
-      "category": 1,
+      "category": 10,
       "price": "9.99",
       "is_available": true,
       "preparation_time": 15,
@@ -683,7 +763,7 @@
       "chef": 1,
       "name": "Italian Burger",
       "description": "Beef burger with mozzarella, tomato, basil pesto on ciabatta",
-      "category": 4,
+      "category": 3,
       "price": "16.99",
       "is_available": true,
       "preparation_time": 20,
@@ -709,7 +789,7 @@
       "chef": 2,
       "name": "Enchiladas Verdes",
       "description": "Corn tortillas filled with chicken, covered in green tomatillo salsa",
-      "category": 2,
+      "category": 8,
       "price": "13.99",
       "is_available": true,
       "preparation_time": 25,
@@ -735,7 +815,7 @@
       "chef": 2,
       "name": "Churros",
       "description": "Fried dough pastry with cinnamon sugar and chocolate dipping sauce",
-      "category": 2,
+      "category": 10,
       "price": "7.99",
       "is_available": true,
       "preparation_time": 20,
@@ -761,7 +841,7 @@
       "chef": 2,
       "name": "Mexican Bowl",
       "description": "Rice bowl with black beans, corn, guacamole, and chipotle sauce",
-      "category": 4,
+      "category": 12,
       "price": "11.99",
       "is_available": true,
       "preparation_time": 15,
@@ -787,7 +867,7 @@
       "chef": 3,
       "name": "Bouillabaisse",
       "description": "Traditional French Proven\u00e7al fish stew with saffron and rouille",
-      "category": 1,
+      "category": 4,
       "price": "24.99",
       "is_available": true,
       "preparation_time": 45,
@@ -813,7 +893,7 @@
       "chef": 3,
       "name": "Mediterranean Platter",
       "description": "Hummus, falafel, tabbouleh, olives, and pita bread",
-      "category": 3,
+      "category": 12,
       "price": "15.99",
       "is_available": true,
       "preparation_time": 20,
@@ -839,7 +919,7 @@
       "chef": 3,
       "name": "Coq au Vin",
       "description": "French braised chicken in red wine with mushrooms and pearl onions",
-      "category": 1,
+      "category": 4,
       "price": "21.99",
       "is_available": true,
       "preparation_time": 40,
@@ -865,7 +945,7 @@
       "chef": 4,
       "name": "Sushi Omakase",
       "description": "Chef selection of 12 pieces of premium nigiri sushi",
-      "category": 3,
+      "category": 6,
       "price": "35.99",
       "is_available": true,
       "preparation_time": 30,
@@ -889,9 +969,9 @@
     "pk": 15,
     "fields": {
       "chef": 4,
-      "name": "Ramen Tonkotsu",
-      "description": "Rich pork bone broth with chashu, soft egg, and green onions",
-      "category": 3,
+      "name": "Japanese Green Tea",
+      "description": "Traditional green tea with a light, refreshing flavor",
+      "category": 11,
       "price": "16.99",
       "is_available": true,
       "preparation_time": 25,
@@ -917,7 +997,7 @@
       "chef": 4,
       "name": "Tempura Moriawase",
       "description": "Assorted seafood and vegetable tempura with tentsuyu sauce",
-      "category": 3,
+      "category": 6,
       "price": "18.99",
       "is_available": true,
       "preparation_time": 20,
@@ -943,7 +1023,7 @@
       "chef": 5,
       "name": "Butter Chicken",
       "description": "Tender chicken in creamy tomato sauce with fenugreek and butter",
-      "category": 3,
+      "category": 8,
       "price": "14.99",
       "is_available": true,
       "preparation_time": 30,
@@ -969,7 +1049,7 @@
       "chef": 5,
       "name": "Vegetable Biryani",
       "description": "Fragrant basmati rice with mixed vegetables and aromatic spices",
-      "category": 3,
+      "category": 12,
       "price": "12.99",
       "is_available": true,
       "preparation_time": 35,
@@ -993,9 +1073,9 @@
     "pk": 19,
     "fields": {
       "chef": 5,
-      "name": "Garlic Naan",
-      "description": "Traditional Indian flatbread with garlic and butter",
-      "category": 3,
+      "name": "Caesar Salad",
+      "description": "Crisp romaine lettuce with Caesar dressing, croutons, and Parmesan cheese",
+      "category": 2,
       "price": "4.99",
       "is_available": true,
       "preparation_time": 10,
@@ -1021,7 +1101,7 @@
       "chef": 6,
       "name": "Lamb Shawarma",
       "description": "Slow-roasted lamb with garlic sauce, pickles, and vegetables",
-      "category": 1,
+      "category": 3,
       "price": "15.99",
       "is_available": true,
       "preparation_time": 25,
@@ -1073,7 +1153,7 @@
       "chef": 6,
       "name": "Mixed Grill",
       "description": "Combination of kebabs, kofta, and chicken with rice and salad",
-      "category": 1,
+      "category": 7,
       "price": "22.99",
       "is_available": true,
       "preparation_time": 30,
@@ -1099,7 +1179,7 @@
       "chef": 7,
       "name": "Chicken Paprikash",
       "description": "Hungarian chicken stew with paprika, sour cream, and dumplings",
-      "category": 4,
+      "category": 8,
       "price": "14.99",
       "is_available": true,
       "preparation_time": 35,
@@ -1123,9 +1203,9 @@
     "pk": 24,
     "fields": {
       "chef": 7,
-      "name": "Sarmale",
-      "description": "Romanian cabbage rolls stuffed with seasoned pork and rice",
-      "category": 4,
+      "name": "Chocolate Croissant",
+      "description": "Flaky buttery pastry filled with rich melted chocolate",
+      "category": 9,
       "price": "13.99",
       "is_available": true,
       "preparation_time": 40,
@@ -1151,7 +1231,7 @@
       "chef": 7,
       "name": "Apple Strudel",
       "description": "Flaky pastry filled with spiced apples, raisins, and cinnamon",
-      "category": 4,
+      "category": 10,
       "price": "6.99",
       "is_available": true,
       "preparation_time": 25,
