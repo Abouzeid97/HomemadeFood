@@ -335,7 +335,7 @@
       "is_primary": true,
       "created_at": "2023-02-01T12:00:00Z",
       "updated_at": "2023-02-01T12:00:00Z",
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg"
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584563/WhatsApp_Image_2026-05-01_at_12.16.09_AM_zj9i4m.jpg"
     }
   },
   {
@@ -346,7 +346,7 @@
       "is_primary": true,
       "created_at": "2023-02-01T12:00:00Z",
       "updated_at": "2023-02-01T12:00:00Z",
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg"
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583800/WhatsApp_Image_2026-05-01_at_12.11.46_AM_rsa4cp.jpg"
     }
   },
   {
@@ -357,7 +357,7 @@
       "is_primary": true,
       "created_at": "2023-02-15T12:00:00Z",
       "updated_at": "2023-02-15T12:00:00Z",
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg"
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582903/WhatsApp_Image_2026-04-30_at_11.58.40_PM_me83bd.jpg"
     }
   },
   {
@@ -368,7 +368,7 @@
       "is_primary": true,
       "created_at": "2023-02-15T12:00:00Z",
       "updated_at": "2023-02-15T12:00:00Z",
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg"
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582222/WhatsApp_Image_2026-04-30_at_11.49.37_PM_krehgb.jpg"
     }
   },
   {
@@ -724,7 +724,7 @@
     "pk": 5,
     "fields": {
       "dish": 5,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584492/WhatsApp_Image_2026-05-01_at_12.15.27_AM_ufwyjd.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -750,7 +750,7 @@
     "pk": 6,
     "fields": {
       "dish": 6,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584887/WhatsApp_Image_2026-05-01_at_12.19.11_AM_q4bblh.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -776,7 +776,7 @@
     "pk": 7,
     "fields": {
       "dish": 7,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583606/WhatsApp_Image_2026-05-01_at_12.06.50_AM_fnxzd2.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -802,7 +802,7 @@
     "pk": 8,
     "fields": {
       "dish": 8,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583405/WhatsApp_Image_2026-05-01_at_12.04.48_AM_a7gyyg.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -828,7 +828,7 @@
     "pk": 9,
     "fields": {
       "dish": 9,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583205/WhatsApp_Image_2026-05-01_at_12.01.23_AM_mt9pmj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -854,7 +854,7 @@
     "pk": 10,
     "fields": {
       "dish": 10,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584257/WhatsApp_Image_2026-05-01_at_12.13.27_AM_nh91lj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -880,7 +880,7 @@
     "pk": 11,
     "fields": {
       "dish": 11,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582356/WhatsApp_Image_2026-04-30_at_11.51.17_PM_emu6zk.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -906,7 +906,7 @@
     "pk": 12,
     "fields": {
       "dish": 12,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584107/WhatsApp_Image_2026-05-01_at_12.12.40_AM_giiow8.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -932,7 +932,7 @@
     "pk": 13,
     "fields": {
       "dish": 13,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583277/WhatsApp_Image_2026-05-01_at_12.02.14_AM_tpjcja.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -958,7 +958,7 @@
     "pk": 14,
     "fields": {
       "dish": 14,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584713/WhatsApp_Image_2026-05-01_at_12.17.15_AM_synvds.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -984,7 +984,7 @@
     "pk": 15,
     "fields": {
       "dish": 15,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583664/WhatsApp_Image_2026-05-01_at_12.08.08_AM_ujl86r.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1010,7 +1010,7 @@
     "pk": 16,
     "fields": {
       "dish": 16,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584805/WhatsApp_Image_2026-05-01_at_12.17.58_AM_jh3na1.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1036,7 +1036,7 @@
     "pk": 17,
     "fields": {
       "dish": 17,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582512/WhatsApp_Image_2026-04-30_at_11.53.38_PM_orkxul.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1062,7 +1062,7 @@
     "pk": 18,
     "fields": {
       "dish": 18,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584983/WhatsApp_Image_2026-05-01_at_12.20.20_AM_c4hvaj.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1088,7 +1088,7 @@
     "pk": 19,
     "fields": {
       "dish": 19,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582632/WhatsApp_Image_2026-04-30_at_11.54.46_PM_tjf6aa.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1114,7 +1114,7 @@
     "pk": 20,
     "fields": {
       "dish": 20,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583745/WhatsApp_Image_2026-05-01_at_12.10.38_AM_dbleil.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1140,7 +1140,7 @@
     "pk": 21,
     "fields": {
       "dish": 21,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583501/WhatsApp_Image_2026-05-01_at_12.05.51_AM_udeujp.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1166,7 +1166,7 @@
     "pk": 22,
     "fields": {
       "dish": 22,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777584346/WhatsApp_Image_2026-05-01_at_12.14.29_AM_y1fqhc.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1192,7 +1192,7 @@
     "pk": 23,
     "fields": {
       "dish": 23,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582794/WhatsApp_Image_2026-04-30_at_11.56.34_PM_gz5ekb.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1218,7 +1218,7 @@
     "pk": 24,
     "fields": {
       "dish": 24,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777583117/WhatsApp_Image_2026-04-30_at_11.59.56_PM_pji85h.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
@@ -1244,7 +1244,7 @@
     "pk": 25,
     "fields": {
       "dish": 25,
-      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777041912/dish_zldtcj.jpg",
+      "image": "https://res.cloudinary.com/dljw6q0yq/image/upload/v1777582105/WhatsApp_Image_2026-04-30_at_11.46.58_PM_o2azh8.jpg",
       "is_primary": true,
       "created_at": "2023-06-01T12:00:00Z",
       "updated_at": "2023-06-01T12:00:00Z"
