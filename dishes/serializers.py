@@ -301,10 +301,11 @@ class DishSerializer(serializers.ModelSerializer):
             setattr(instance, attr, value)
         instance.save()
 
+        # delete old
+        instance.variety_sections.all().delete()
+
         # ✅ update nested (ONLY if provided in PATCH)
         if sections_data is not None:
-            # delete old
-            instance.variety_sections.all().delete()
 
             # recreate
             for section_data in sections_data:
