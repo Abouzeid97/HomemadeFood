@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Category, Dish, DishReview, DishImage, DishVarietySection, DishVarietyOption
 from authentication.models import User, Chef
 from authentication.serializers import UserSerializer
+from django.db import transaction
 from django.conf import settings
 
 
@@ -266,20 +267,61 @@ class DishSerializer(serializers.ModelSerializer):
     # ✅ create sections + options
         for section_data in sections_data:
             options_data = section_data.pop('options', [])
-    
+
             section = DishVarietySection.objects.create(
                 dish=dish,
                 **section_data
             )
-    
+
             for option_data in options_data:
                 DishVarietyOption.objects.create(
                     section=section,
                     **option_data
                 )
-    
-        return dish
 
+        return dish
+    @transaction.atomic
+    def update(self, instance, validated_data):
+        sections_data = validated_data.pop('variety_sections', None)
+
+        # 🔴 handle name uniqueness on update
+        name = validated_data.get('name', instance.name)
+        chef = self.context['request'].user
+
+        if Dish.objects.filter(
+            chef=chef,
+            name__iexact=name
+        ).exclude(id=instance.id).exists():
+            raise serializers.ValidationError({
+                "name": "You already have a dish with this name."
+            })
+
+        # ✅ update basic fields
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        # ✅ update nested (ONLY if provided in PATCH)
+        if sections_data is not None:
+            # delete old
+            instance.variety_sections.all().delete()
+
+            # recreate
+            for section_data in sections_data:
+                options_data = section_data.pop('options', [])
+
+                section = DishVarietySection.objects.create(
+                    dish=instance,
+                    **section_data
+                )
+
+                for option_data in options_data:
+                    DishVarietyOption.objects.create(
+                        section=section,
+                        **option_data
+                    )
+
+        return instance
 
 # Homepage Serializers
 
