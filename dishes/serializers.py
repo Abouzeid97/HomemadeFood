@@ -142,7 +142,7 @@ class DishVarietyOptionSerializer(serializers.ModelSerializer):
 
 class DishVarietySectionSerializer(serializers.ModelSerializer):
     """Serializer for DishVarietySection model"""
-    options = DishVarietyOptionSerializer(many=True, read_only=True)
+    options = DishVarietyOptionSerializer(many=True)
 
     class Meta:
         model = DishVarietySection
@@ -215,7 +215,7 @@ class DishSerializer(serializers.ModelSerializer):
     )
     images = DishImageSerializer(many=True, read_only=True)
     reviews_preview = serializers.SerializerMethodField()
-    variety_sections = DishVarietySectionSerializer(many=True, read_only=True)
+    variety_sections = DishVarietySectionSerializer(many=True, required=False)
     rating_avg = serializers.SerializerMethodField()
     reviews_count = serializers.SerializerMethodField()
 
@@ -252,9 +252,33 @@ class DishSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """Create a new dish with the authenticated chef"""
         request = self.context.get('request')
+        name = validated_data.get('name')
+        sections_data = validated_data.pop('variety_sections', [])
         if request and hasattr(request, 'user'):
             validated_data['chef'] = request.user
-        return super().create(validated_data)
+
+        if Dish.objects.filter(chef=validated_data['chef'], name=name).exists():
+            raise serializers.ValidationError({
+                "name": "You already have a dish with this name."
+            })    
+        dish = Dish.objects.create(**validated_data)
+
+    # ✅ create sections + options
+        for section_data in sections_data:
+            options_data = section_data.pop('options', [])
+    
+            section = DishVarietySection.objects.create(
+                dish=dish,
+                **section_data
+            )
+    
+            for option_data in options_data:
+                DishVarietyOption.objects.create(
+                    section=section,
+                    **option_data
+                )
+    
+        return dish
 
 
 # Homepage Serializers
