@@ -84,7 +84,6 @@ class OrderListSerializer(serializers.ModelSerializer):
     chef_name = serializers.CharField(source='chef_name_snapshot')
     items_count = serializers.SerializerMethodField()
     estimated_ready_time = serializers.DateTimeField(read_only=True)
-    dish_name = serializers.CharField(source='dish_name_snapshot')
     
     class Meta:
         model = Order
@@ -97,7 +96,6 @@ class OrderListSerializer(serializers.ModelSerializer):
             'created_at',
             'items_count',
             'estimated_ready_time',
-            'dish_name',
         ]
 
     def get_items_count(self, obj):
