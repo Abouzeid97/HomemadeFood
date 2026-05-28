@@ -10,7 +10,7 @@ def refresh_job():
         print("Cancel expired orders status:", response2.status_code)
     except Exception as e:
         print("Error calling refresh:", e)
-
+    
 
 def start_scheduler():
     scheduler = BackgroundScheduler()
