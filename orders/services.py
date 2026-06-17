@@ -406,7 +406,7 @@ class CancelExpiredOrdersService:
             )
             count += 1
         for order in delivery_orders:
-            order.status = OrderStatus.OUT_FOR_DELIVERY
+            order.status = OrderStatus.DELIVERED
             order.delivered_at = timezone.now()
             order.save(update_fields=['status', 'delivered_at'])
             OrderNotification.objects.create(
