@@ -36,7 +36,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     phone_number = models.CharField(max_length=20, unique=True)
-    profile_picture = CloudinaryField('Profile Picture', folder='profiles/', default=settings.DEFAULT_PROFILE_PICTURE)
+    profile_picture = CloudinaryField('Profile Picture', folder='profiles/', default=settings.DEFAULT_PROFILE_PICTURE, null=True, blank=True)
     address_longitude = models.DecimalField(max_digits=15, decimal_places=11, null=True, blank=True)
     address_latitude = models.DecimalField(max_digits=15, decimal_places=11, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
