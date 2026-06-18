@@ -6,6 +6,7 @@ from django.db import transaction
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 
+from requests import Response
 from rest_framework.exceptions import PermissionDenied
 
 from .models import Order, OrderItem, OrderItemVarietySelection, OrderNotification
@@ -78,7 +79,7 @@ class OrderCreateService:
         # Check chef is online
         chef = User.objects.get(id=self.chef_id)
         if not hasattr(chef, 'chef') or not chef.chef.is_online:
-            raise ValidationError({"message": "Chef is not currently accepting orders."})
+            raise ValidationError(Response("Chef is currently offline. Please try again later.", status=503))
 
         # Validate variety selections
         for item in self.items:
