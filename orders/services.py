@@ -369,40 +369,30 @@ class CancelExpiredOrdersService:
                 ),
             )
 
-            # Broadcast WebSocket notification
-            customer_name = (
-                f"{order.customer.first_name} {order.customer.last_name}".strip()
-                or order.customer.email
+            # Broadcast WebSocket notifications
+            now_iso = timezone.now().isoformat()
+            cancel_message = (
+                f"Order #{order.order_id} was auto-cancelled because "
+                f"the chef did not respond within 5 minutes."
             )
-            
-            cancellation_data = {
+            cancel_data = {
+                'notification_type': NotificationType.ORDER_CANCELLED,
                 'order_id': str(order.order_id),
-                'customer_name': customer_name,
-                'total_amount': str(order.total_amount),
-                'items_count': order.items.count(),
-                'message': 'order is auto canceled',
-                'created_at': timezone.now().isoformat(),
+                'message': cancel_message,
+                'created_at': now_iso,
             }
-            
-            # Send to chef directly
-            send_to_user_group(
-                user_id=order.chef.id,
-                event_type='order_canceled',
-                data=cancellation_data,
-            )
-            
-            # Send to customer directly
-            send_to_user_group(
-                user_id=order.customer.id,
-                event_type='order_canceled',
-                data=cancellation_data,
-            )
-            
-            # Send to live order subscribers
+
+            for user_id in (order.chef.id, order.customer.id):
+                send_to_user_group(
+                    user_id=user_id,
+                    event_type='order_notification',
+                    data=cancel_data,
+                )
+
             send_to_order_group(
                 order_id=str(order.order_id),
-                event_type='order_canceled',
-                data=cancellation_data,
+                event_type='order_notification',
+                data=cancel_data,
             )
             count += 1
         for order in delivery_orders:
@@ -427,32 +417,34 @@ class CancelExpiredOrdersService:
                     f"If the customer hasn't received it, please contact support."
                 ),
             )
-            customer_name = (
-                f"{order.customer.first_name} {order.customer.last_name}".strip()
-                or order.customer.email
-            )
-            delivery_data = {
-                'order_id': str(order.order_id),
-                'customer_name': customer_name,
-                'total_amount': str(order.total_amount),
-                'items_count': order.items.count(),
-                'message': 'order is marked as delivered',
-                'created_at': timezone.now().isoformat(),
-            }
-            send_to_user_group(
-                user_id=order.chef.id,
-                event_type='order_delivered',
-                data=delivery_data,
-            )
-            send_to_user_group(
-                user_id=order.customer.id,
-                event_type='order_delivered',
-                data=delivery_data,
-            )
+            now_iso = timezone.now().isoformat()
+
+            for user_id, message in [
+                (order.chef.id, f"Order #{order.order_id} has been marked as delivered. "
+                                f"If the customer hasn't received it, please contact support."),
+                (order.customer.id, f"Order #{order.order_id} has been marked as delivered. "
+                                    f"If you haven't received it, please contact support."),
+            ]:
+                send_to_user_group(
+                    user_id=user_id,
+                    event_type='order_notification',
+                    data={
+                        'notification_type': NotificationType.DELIVERED,
+                        'order_id': str(order.order_id),
+                        'message': message,
+                        'created_at': now_iso,
+                    },
+                )
+
             send_to_order_group(
                 order_id=str(order.order_id),
-                event_type='order_delivered',
-                data=delivery_data,
+                event_type='order_notification',
+                data={
+                    'notification_type': NotificationType.DELIVERED,
+                    'order_id': str(order.order_id),
+                    'message': f"Order #{order.order_id} has been delivered.",
+                    'created_at': now_iso,
+                },
             )
             count += 1
 
