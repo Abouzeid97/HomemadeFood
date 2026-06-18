@@ -8,7 +8,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 PORT = os.environ.get('PORT', '8000')
 
 URLS = [
-    f"https://wobble-froth-polish.ngrok-free.dev/api/dishes/refresh/",
     f"https://wobble-froth-polish.ngrok-free.dev/api/orders/cancel-expired/",
 ]
 

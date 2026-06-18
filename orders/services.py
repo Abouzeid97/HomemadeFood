@@ -78,7 +78,7 @@ class OrderCreateService:
         # Check chef is online
         chef = User.objects.get(id=self.chef_id)
         if not hasattr(chef, 'chef') or not chef.chef.is_online:
-            raise ValidationError("Chef is not currently accepting orders.")
+            raise ValidationError({"message": "Chef is not currently accepting orders."})
 
         # Validate variety selections
         for item in self.items:
