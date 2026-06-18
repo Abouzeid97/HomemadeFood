@@ -94,7 +94,7 @@ class OrderCreateService:
         # Check chef is online
         chef = User.objects.get(id=self.chef_id)
         if not hasattr(chef, 'chef') or not chef.chef.is_online:
-            return JsonResponse(
+            raise JsonResponse(
                 {"message": "Chef is currently offline. Please try again later."},
                 status=400,
             )
