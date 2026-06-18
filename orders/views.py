@@ -1,9 +1,5 @@
 from rest_framework import status, generics, permissions
-from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
-from django.core.exceptions import ValidationError as DjangoValidationError
-from rest_framework.exceptions import ValidationError, PermissionDenied
 
 from .models import Order, OrderNotification
 from .serializers import (
@@ -46,19 +42,16 @@ class OrderCreateView(generics.CreateAPIView):
         validated_data = serializer.validated_data
         items = validated_data.pop('items', [])
 
-        try:
-            service = OrderCreateService(
-                customer=request.user,
-                chef_id=validated_data['chef_id'],
-                items=items,
-                delivery_address=validated_data['delivery_address'],
-                delivery_longitude=validated_data.get('delivery_longitude'),
-                delivery_latitude=validated_data.get('delivery_latitude'),
-                special_instructions=validated_data.get('special_instructions'),
-            )
-            order = service.execute()
-        except DjangoValidationError as e:
-            raise ValidationError(str(e))
+        service = OrderCreateService(
+            customer=request.user,
+            chef_id=validated_data['chef_id'],
+            items=items,
+            delivery_address=validated_data['delivery_address'],
+            delivery_longitude=validated_data.get('delivery_longitude'),
+            delivery_latitude=validated_data.get('delivery_latitude'),
+            special_instructions=validated_data.get('special_instructions'),
+        )
+        order = service.execute()
 
         output_serializer = OrderDetailSerializer(order)
         return Response(
@@ -139,18 +132,13 @@ class OrderStatusUpdateView(generics.GenericAPIView):
         new_status = serializer.validated_data['status']
         cancellation_reason = serializer.validated_data.get('cancellation_reason')
 
-        try:
-            service = OrderStatusService(
-                order=order,
-                new_status=new_status,
-                user=request.user,
-                cancellation_reason=cancellation_reason,
-            )
-            updated_order = service.execute()
-        except DjangoValidationError as e:
-            raise ValidationError(str(e))
-        except PermissionDenied as e:
-            raise PermissionDenied(str(e))
+        service = OrderStatusService(
+            order=order,
+            new_status=new_status,
+            user=request.user,
+            cancellation_reason=cancellation_reason,
+        )
+        updated_order = service.execute()
 
         output_serializer = OrderDetailSerializer(updated_order)
         return Response(output_serializer.data)

@@ -1,13 +1,11 @@
 from decimal import Decimal
 from datetime import timedelta
 
-from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 
-from requests import Response
-from rest_framework.exceptions import JsonResponse, PermissionDenied
+from rest_framework.exceptions import ValidationError, PermissionDenied
 
 from .models import Order, OrderItem, OrderItemVarietySelection, OrderNotification
 from .constants import (
@@ -51,77 +49,59 @@ class OrderCreateService:
     def validate(self):
         """Run all pre-creation checks. Raises ValidationError on failure."""
         if not self.items:
-            return JsonResponse(
-                {"message": "At least one item is required."},
-                status=400,
-            )
+            raise ValidationError("At least one item is required.")
 
         dish_ids = [item['dish_id'] for item in self.items]
         dishes = Dish.objects.filter(id__in=dish_ids).select_related('chef')
 
-        # Check all dishes exist
         found_ids = {d.id for d in dishes}
         missing = set(dish_ids) - found_ids
         if missing:
-            return JsonResponse(
-                {"message": f"Dishes not found: {missing}"},
-                status=400,
-            )
+            raise ValidationError({"message": f"Dishes not found: {missing}"})
 
-        # Check all dishes are available
         unavailable = [d.id for d in dishes if not d.is_available]
         if unavailable:
-            return JsonResponse(
-                {"message": f"The following dishes are unavailable: {unavailable}"},
-                status=400,
+            raise ValidationError(
+                {"message": f"The following dishes are unavailable: {unavailable}"}
             )
 
-        # Check all dishes belong to the same chef
         chef_ids = {d.chef_id for d in dishes}
         if len(chef_ids) != 1:
-            return JsonResponse(
-                {"message": "All dishes must belong to the same chef."},
-                status=400,
+            raise ValidationError(
+                {"message": "All dishes must belong to the same chef."}
             )
 
         target_chef_id = chef_ids.pop()
         if target_chef_id != self.chef_id:
-            return JsonResponse(
-                {"message": "Chef ID does not match the dishes' chef."},
-                status=400,
+            raise ValidationError(
+                {"message": "Chef ID does not match the dishes' chef."}
             )
 
-        # Check chef is online
         chef = User.objects.get(id=self.chef_id)
         if not hasattr(chef, 'chef') or not chef.chef.is_online:
-            raise JsonResponse(
-                {"message": "Chef is currently offline. Please try again later."},
-                status=400,
+            raise ValidationError(
+                {"message": "Chef is currently offline. Please try again later."}
             )
 
-        # Validate variety selections
         for item in self.items:
             dish = next(d for d in dishes if d.id == item['dish_id'])
             for selection in item.get('variety_selections', []):
                 section_id = selection.get('section_id')
                 option_id = selection.get('option_id')
                 if not dish.variety_sections.filter(id=section_id).exists():
-                    return JsonResponse(
-                        {"message": f"Section {section_id} not found for dish {dish.name}"},
-                        status=400,
+                    raise ValidationError(
+                        {"message": f"Section {section_id} not found for dish {dish.name}"}
                     )
                 opt = DishVarietyOption.objects.filter(
                     section_id=section_id, id=option_id
                 ).first()
                 if not opt:
-                    return JsonResponse(
-                        {"message": f"Option {option_id} not found in section {section_id}"},
-                        status=400,
+                    raise ValidationError(
+                        {"message": f"Option {option_id} not found in section {section_id}"}
                     )
                 if not opt.is_available:
-                    return JsonResponse(
-                        {"message": f"Option {opt.name} is not available"},
-                        status=400,
+                    raise ValidationError(
+                        {"message": f"Option {opt.name} is not available"}
                     )
 
     @transaction.atomic
